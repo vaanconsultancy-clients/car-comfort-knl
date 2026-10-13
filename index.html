@@ -375,7 +375,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
   border-radius:100px;font-size:13px;font-weight:600;color:var(--blue-bright);
 }
 
-/* GALLERY PREVIEW (hidden until photos load) */
+/* GALLERY PREVIEW */
 .gallery-preview{
   padding:var(--section-pad);background:var(--black);position:relative;
   display:none;
@@ -675,60 +675,11 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
     <h2 class="section-title reveal reveal-delay-1">Our Services</h2>
     <p class="section-subtitle reveal reveal-delay-2">From seat covers to full custom interiors — everything your car needs to look and feel premium.</p>
 
-    <div class="services-grid" id="servicesGrid">
-      <div class="service-card reveal reveal-delay-1">
-        <div class="service-icon">
-          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4-4 4 4 4-4 4 4M5 17h14"/></svg>
-        </div>
-        <h3>Seat Cover</h3>
-        <p>Diamond-stitched leather seat covers — custom fit for every car model, with premium stitching and finish.</p>
-      </div>
-
-      <div class="service-card reveal reveal-delay-2">
-        <div class="service-icon">
-          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>
-        </div>
-        <h3>Steering Wheel Wrap</h3>
-        <p>Premium leather steering wheel wraps — better grip, better feel, and a sporty look that lasts.</p>
-      </div>
-
-      <div class="service-card reveal reveal-delay-3">
-        <div class="service-icon">
-          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4-4 4 4 4-4 4 4M4 20h16M4 12V8a2 2 0 012-2h12a2 2 0 012 2v4"/></svg>
-        </div>
-        <h3>Door Panel & Dashboard</h3>
-        <p>Custom-wrapped door panels and dashboard styling that matches your car's personality.</p>
-      </div>
-
-      <div class="service-card reveal reveal-delay-4">
-        <div class="service-icon">
-          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M3 12l2-6h14l2 6M3 12v6h18v-6M7 18v2M17 18v2"/></svg>
-        </div>
-        <h3>Roof Cloth</h3>
-        <p>Premium roof lining replacement — fresh, clean, and perfectly fitted to restore your cabin's feel.</p>
-      </div>
-
-      <div class="service-card reveal reveal-delay-5">
-        <div class="service-icon">
-          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8M8 12h8"/></svg>
-        </div>
-        <h3>Gear Cover & Knob Leather</h3>
-        <p>Stylish gear knob and handbrake leather covers — small details, big impact on your car's interior.</p>
-      </div>
-
-      <div class="service-card reveal reveal-delay-6">
-        <div class="service-icon">
-          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 4l2 5 5 .5-4 3.5 1.5 5-4.5-3-4.5 3L8 13l-4-3.5 5-.5z"/></svg>
-        </div>
-        <h3>Custom Interior</h3>
-        <p>Full custom interiors built from scratch — from design to fit, we craft the complete look you want.</p>
-      </div>
-
-    </div>
+    <div class="services-grid" id="servicesGrid"></div>
   </div>
 </section>
 
-<!-- GALLERY PREVIEW (hidden until photos loaded from admin) -->
+<!-- GALLERY PREVIEW -->
 <section class="gallery-preview" id="gallery">
   <div class="container">
     <span class="section-label reveal">Our Work</span>
@@ -895,7 +846,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 <script>
 /* ============================================================
    CAR COMFORT — INDEX.JS
-   Supabase keys integrated.
+   Services loaded from Supabase only. No static duplicates.
    ============================================================ */
 
 // ---------- CONFIG ----------
@@ -961,15 +912,6 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-// ---------- SERVICE CARD MOUSE GLOW ----------
-document.querySelectorAll('.service-card').forEach(card => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    card.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width) * 100 + '%');
-    card.style.setProperty('--my', ((e.clientY - rect.top) / rect.height) * 100 + '%');
-  });
-});
 
 // ---------- PARTICLE CANVAS ----------
 (function initParticles() {
