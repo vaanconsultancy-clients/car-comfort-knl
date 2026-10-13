@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gallery — Car Comfort | Car Interior Studio, Karnal</title>
+<meta name="description" content="Browse our recent car interior work — seat covers, dashboards, roof cloth & custom interiors. Car Comfort, Karnal." />
+<link rel="icon" type="image/png" href="assets/carcomfortlogo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   CAR COMFORT — GALLERY.HTML STYLES
+   ============================================================ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0a1628;
+  --navy-light:#142b47;
+  --navy-mid:#0e1e35;
+  --black:#050810;
+  --blue:#1e6fd9;
+  --blue-bright:#2d8cff;
+  --blue-glow:rgba(45,140,255,.35);
+  --white:#fff;
+  --gray:#8892a6;
+  --gray-light:#c5cddb;
+  --border:rgba(255,255,255,.08);
+  --border-bright:rgba(45,140,255,.3);
+  --font-main:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --font-display:'Space Grotesk','Inter',sans-serif;
+  --section-pad:120px 24px;
+  --container:1240px;
+  --radius:14px;
+  --shadow-glow:0 0 50px var(--blue-glow);
+  --transition:all .35s cubic-bezier(.4,0,.2,1);
+  --transition-slow:all .8s cubic-bezier(.16,1,.3,1);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font-main);background:var(--black);color:var(--white);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none;transition:var(--transition)}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+::selection{background:var(--blue-bright);color:var(--white)}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--black)}
+::-webkit-scrollbar-thumb{background:var(--navy-light);border-radius:10px}
+::-webkit-scrollbar-thumb:hover{background:var(--blue)}
+
+.container{max-width:var(--container);margin:0 auto;padding:0 24px}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;letter-spacing:-.02em}
+
+/* ============================================================
+   PAGE LOADER
+   ============================================================ */
+.page-loader{
+  position:fixed;inset:0;z-index:10000;background:var(--black);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px;
+  transition:opacity .6s ease,visibility .6s ease;
+}
+.page-loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-logo{
+  font-family:var(--font-display);font-size:24px;font-weight:700;letter-spacing:.2em;
+  color:var(--white);opacity:0;animation:loaderFadeIn .8s .1s forwards;
+}
+.loader-logo .accent{color:var(--blue-bright)}
+.loader-bar{
+  width:180px;height:2px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;position:relative;
+}
+.loader-bar::after{
+  content:'';position:absolute;left:0;top:0;height:100%;width:0;
+  background:linear-gradient(90deg,var(--blue),var(--blue-bright));
+  animation:loaderFill 1.4s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes loaderFadeIn{to{opacity:1}}
+@keyframes loaderFill{to{width:100%}}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+.reveal-delay-5{transition-delay:.5s}
+.reveal-delay-6{transition-delay:.6s}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:20px 0;
+  background:rgba(5,8,16,0);
+  backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);
+  border-bottom:1px solid transparent;
+  transition:background .4s ease,padding .4s ease,border-color .4s ease,backdrop-filter .4s ease;
+}
+.header.scrolled{
+  padding:12px 0;
+  background:rgba(5,8,16,.85);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom-color:var(--border);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-logo{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-weight:700;font-size:18px}
+.nav-logo img{height:44px;width:auto;transition:transform .35s ease}
+.nav-logo:hover img{transform:scale(1.06)}
+.nav-logo-text{display:flex;flex-direction:column;line-height:1.1}
+.nav-logo-text .brand{font-size:16px;color:var(--white);letter-spacing:.02em}
+.nav-logo-text .tag{font-size:10px;font-weight:500;color:var(--blue-bright);letter-spacing:.14em;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:34px;list-style:none}
+.nav-links a{
+  font-size:14px;font-weight:500;color:var(--gray-light);position:relative;padding:6px 0;
+}
+.nav-links a:hover{color:var(--white)}
+.nav-links a::after{
+  content:'';position:absolute;bottom:0;left:0;width:0;height:2px;
+  background:var(--blue-bright);transition:width .35s cubic-bezier(.4,0,.2,1);
+}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-links a.active{color:var(--white)}
+.nav-cta{
+  display:inline-flex;align-items:center;gap:8px;padding:11px 22px;
+  background:var(--blue);color:var(--white);border-radius:100px;
+  font-size:14px;font-weight:600;transition:var(--transition);
+}
+.nav-cta:hover{background:var(--blue-bright);box-shadow:var(--shadow-glow);transform:translateY(-2px)}
+.nav-cta svg{transition:transform .35s ease}
+.nav-cta:hover svg{transform:rotate(-12deg) scale(1.1)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;padding:8px;z-index:1001}
+.nav-toggle span{width:26px;height:2px;background:var(--white);transition:var(--transition);border-radius:2px}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ============================================================
+   PAGE HERO
+   ============================================================ */
+.page-hero{
+  position:relative;padding:180px 0 100px;
+  background:radial-gradient(circle at 30% 20%,rgba(30,111,217,.15),transparent 55%),
+             radial-gradient(circle at 70% 80%,rgba(45,140,255,.1),transparent 55%),
+             var(--black);
+  text-align:center;overflow:hidden;
+}
+.page-hero-grid{
+  position:absolute;inset:0;z-index:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(circle at 50% 50%,black 20%,transparent 75%);
+  -webkit-mask-image:radial-gradient(circle at 50% 50%,black 20%,transparent 75%);
+}
+.page-hero-blocks{
+  position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+}
+.page-hero-blocks .block{
+  position:absolute;border:1px solid rgba(45,140,255,.08);border-radius:4px;
+  background:linear-gradient(135deg,rgba(45,140,255,.02),transparent);
+  animation:blockFloat 14s ease-in-out infinite;
+}
+.page-hero-blocks .block:nth-child(1){width:140px;height:140px;top:18%;left:8%;animation-delay:0s}
+.page-hero-blocks .block:nth-child(2){width:100px;height:100px;top:65%;left:80%;animation-delay:2s}
+.page-hero-blocks .block:nth-child(3){width:180px;height:180px;top:10%;right:6%;animation-delay:1s}
+.page-hero-blocks .block:nth-child(4){width:80px;height:80px;top:80%;left:22%;animation-delay:3s}
+@keyframes blockFloat{
+  0%,100%{transform:translateY(0) rotate(0deg);opacity:.4}
+  50%{transform:translateY(-28px) rotate(6deg);opacity:.8}
+}
+.page-hero .container{position:relative;z-index:2}
+.page-hero .section-label{padding-left:0;justify-content:center;display:inline-flex}
+.page-hero h1{
+  font-size:clamp(38px,7vw,76px);margin-bottom:20px;letter-spacing:-.035em;
+  opacity:0;animation:heroFadeUp 1s .3s cubic-bezier(.16,1,.3,1) forwards;
+}
+.page-hero h1 .accent{
+  background:linear-gradient(135deg,var(--blue-bright),#6cb4ff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.page-hero p{
+  font-size:17px;color:var(--gray);max-width:560px;margin:0 auto;line-height:1.7;
+  opacity:0;animation:heroFadeUp 1s .5s cubic-bezier(.16,1,.3,1) forwards;
+}
+@keyframes heroFadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.page-hero .section-label{
+  opacity:0;animation:heroFadeUp 1s .1s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+/* ============================================================
+   FULL GALLERY
+   ============================================================ */
+.gallery-full{padding:80px 0 120px;background:var(--black);position:relative}
+.gallery-full-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:20px;
+}
+.gallery-full-grid .gallery-item{
+  position:relative;aspect-ratio:1;border-radius:var(--radius);overflow:hidden;
+  cursor:pointer;background:var(--navy-light);border:1px solid var(--border);
+  opacity:0;transform:translateY(40px) scale(.96);
+  transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .35s ease,box-shadow .35s ease;
+}
+.gallery-full-grid .gallery-item.in{opacity:1;transform:translateY(0) scale(1)}
+.gallery-full-grid .gallery-item:hover{
+  border-color:var(--border-bright);
+  box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 40px rgba(45,140,255,.15);
+}
+.gallery-full-grid .gallery-item img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .9s cubic-bezier(.16,1,.3,1);
+}
+.gallery-full-grid .gallery-item:hover img{transform:scale(1.1)}
+.gallery-full-grid .gallery-item::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(5,8,16,.9),transparent 55%);
+  opacity:0;transition:opacity .4s ease;
+}
+.gallery-full-grid .gallery-item:hover::after{opacity:1}
+.gallery-full-grid .gallery-item .caption{
+  position:absolute;bottom:18px;left:18px;right:18px;
+  font-size:14px;font-weight:600;color:var(--white);
+  opacity:0;transform:translateY(12px);transition:var(--transition);z-index:2;
+}
+.gallery-full-grid .gallery-item:hover .caption{opacity:1;transform:translateY(0)}
+.gallery-full-grid .gallery-item .zoom-icon{
+  position:absolute;top:16px;right:16px;width:36px;height:36px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(45,140,255,.9);border-radius:50%;color:var(--white);
+  opacity:0;transform:scale(.7);transition:var(--transition);z-index:2;
+}
+.gallery-full-grid .gallery-item:hover .zoom-icon{opacity:1;transform:scale(1)}
+.gallery-full-grid .gallery-item .zoom-icon svg{width:16px;height:16px}
+
+/* Loading state */
+.loading-state{
+  grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--gray);
+}
+.spinner{
+  width:40px;height:40px;border:3px solid var(--border);
+  border-top-color:var(--blue-bright);border-radius:50%;
+  animation:spin 1s linear infinite;margin:0 auto 18px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Empty state */
+.empty-state{
+  grid-column:1/-1;text-align:center;padding:100px 24px;
+  border:1px dashed var(--border);border-radius:var(--radius);
+  background:linear-gradient(180deg,var(--navy),transparent);
+}
+.empty-state .empty-icon{
+  width:64px;height:64px;margin:0 auto 20px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(45,140,255,.08);border:1px solid rgba(45,140,255,.2);
+  border-radius:50%;color:var(--blue-bright);
+}
+.empty-state .empty-icon svg{width:28px;height:28px}
+.empty-state h3{font-size:22px;margin-bottom:10px;color:var(--white)}
+.empty-state p{font-size:15px;color:var(--gray);max-width:420px;margin:0 auto 24px;line-height:1.7}
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+.lightbox{
+  position:fixed;inset:0;z-index:2000;background:rgba(3,5,10,.97);
+  display:none;align-items:center;justify-content:center;padding:40px 20px;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  opacity:0;transition:opacity .3s ease;
+}
+.lightbox.open{display:flex;opacity:1}
+.lightbox img{
+  max-width:92vw;max-height:82vh;object-fit:contain;border-radius:10px;
+  box-shadow:0 30px 80px rgba(0,0,0,.8);
+  transform:scale(.95);transition:transform .4s cubic-bezier(.16,1,.3,1);
+}
+.lightbox.open img{transform:scale(1)}
+.lightbox-close{
+  position:absolute;top:24px;right:28px;width:46px;height:46px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  border-radius:50%;color:var(--white);font-size:22px;
+  transition:var(--transition);z-index:2;
+}
+.lightbox-close:hover{background:rgba(255,92,92,.9);transform:rotate(90deg)}
+.lightbox-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:52px;height:52px;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  border-radius:50%;color:var(--white);font-size:22px;
+  transition:var(--transition);z-index:2;
+}
+.lightbox-nav:hover{background:var(--blue);border-color:var(--blue);transform:translateY(-50%) scale(1.08)}
+.lightbox-prev{left:28px}
+.lightbox-next{right:28px}
+.lightbox-caption{
+  position:absolute;bottom:28px;left:0;right:0;text-align:center;
+  color:var(--white);font-size:14px;padding:0 20px;letter-spacing:.02em;
+}
+.lightbox-counter{
+  position:absolute;top:30px;left:50%;transform:translateX(-50%);
+  font-size:13px;color:var(--gray-light);letter-spacing:.1em;
+  background:rgba(255,255,255,.06);padding:6px 16px;border-radius:100px;
+  border:1px solid rgba(255,255,255,.1);
+}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact{padding:var(--section-pad);background:var(--black);position:relative}
+.section-label{
+  display:inline-flex;align-items:center;gap:12px;
+  font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--blue-bright);margin-bottom:20px;
+}
+.section-label::before{content:'';width:24px;height:2px;background:var(--blue-bright)}
+.section-title{font-size:clamp(30px,5vw,52px);margin-bottom:20px;letter-spacing:-.03em}
+.section-subtitle{font-size:16px;color:var(--gray);max-width:620px;margin-bottom:60px;line-height:1.7}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.contact-info{display:flex;flex-direction:column;gap:28px}
+.contact-item{display:flex;gap:18px;align-items:flex-start}
+.contact-item .icon{
+  width:48px;height:48px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(45,140,255,.1);border:1px solid rgba(45,140,255,.2);
+  border-radius:12px;color:var(--blue-bright);transition:var(--transition);
+}
+.contact-item:hover .icon{
+  background:rgba(45,140,255,.2);transform:scale(1.05);
+  box-shadow:0 0 20px rgba(45,140,255,.25);
+}
+.contact-item .icon svg{width:22px;height:22px}
+.contact-item .label{
+  font-size:12px;font-weight:600;color:var(--gray);
+  text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;
+}
+.contact-item .value{font-size:15px;color:var(--white);font-weight:500;line-height:1.6}
+.contact-item .value a:hover{color:var(--blue-bright)}
+.map-embed{
+  width:100%;height:460px;border-radius:var(--radius);overflow:hidden;
+  border:1px solid var(--border);
+}
+.map-embed iframe{width:100%;height:100%;border:0;filter:invert(.9) hue-rotate(180deg) contrast(.9)}
+
+/* Contact form */
+.contact-form{
+  background:linear-gradient(160deg,var(--navy-light),var(--navy-mid));
+  border:1px solid var(--border);border-radius:var(--radius);
+  padding:36px;margin-top:32px;position:relative;overflow:hidden;
+}
+.contact-form::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--blue),var(--blue-bright),transparent);
+}
+.contact-form h3{font-size:20px;margin-bottom:8px}
+.contact-form > p{font-size:14px;color:var(--gray);margin-bottom:28px}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:13px;font-weight:500;color:var(--gray-light);margin-bottom:8px}
+.form-group input,.form-group textarea{
+  width:100%;padding:13px 15px;background:var(--black);
+  border:1px solid var(--border);border-radius:8px;color:var(--white);
+  font-family:inherit;font-size:14px;transition:var(--transition);
+}
+.form-group input:focus,.form-group textarea:focus{
+  outline:none;border-color:var(--blue-bright);
+  box-shadow:0 0 0 3px rgba(45,140,255,.15);
+}
+.form-group textarea{resize:vertical;min-height:120px}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:15px 28px;
+  border-radius:100px;font-size:15px;font-weight:600;
+  transition:var(--transition);cursor:pointer;white-space:nowrap;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--blue),var(--blue-bright));
+  color:var(--white);box-shadow:0 10px 30px rgba(30,111,217,.4);
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(45,140,255,.6)}
+.btn-primary:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.btn-outline{
+  background:rgba(255,255,255,.02);color:var(--white);
+  border:1px solid var(--border);backdrop-filter:blur(10px);
+}
+.btn-outline:hover{
+  border-color:var(--blue-bright);background:rgba(45,140,255,.1);
+  transform:translateY(-3px);
+}
+.btn svg{width:18px;height:18px}
+.form-status{margin-top:14px;font-size:14px;min-height:20px}
+.form-status.success{color:#25D366}
+.form-status.error{color:#ff5c5c}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer{padding:72px 24px 36px;background:var(--navy);border-top:1px solid var(--border)}
+.footer-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr;gap:56px;
+  max-width:var(--container);margin:0 auto 56px;
+}
+.footer-brand p{font-size:14px;color:var(--gray);margin-top:20px;max-width:340px;line-height:1.7}
+.footer h4{
+  font-size:13px;color:var(--white);margin-bottom:20px;
+  text-transform:uppercase;letter-spacing:.1em;
+}
+.footer ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+.footer ul a{font-size:14px;color:var(--gray);position:relative}
+.footer ul a:hover{color:var(--blue-bright);padding-left:6px}
+.footer-bottom{
+  max-width:var(--container);margin:0 auto;padding-top:36px;
+  border-top:1px solid var(--border);
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
+  font-size:13px;color:var(--gray);
+}
+.footer-bottom a{color:var(--blue-bright)}
+
+/* ============================================================
+   WHATSAPP FLOAT
+   ============================================================ */
+.whatsapp-float{
+  position:fixed;bottom:28px;right:28px;z-index:999;
+  width:60px;height:60px;display:flex;align-items:center;justify-content:center;
+  background:#25D366;border-radius:50%;
+  box-shadow:0 10px 30px rgba(37,211,102,.45);
+  transition:var(--transition);
+}
+.whatsapp-float::before{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:#25D366;animation:whatsappPulse 2.4s ease-out infinite;z-index:-1;
+}
+@keyframes whatsappPulse{
+  0%{transform:scale(1);opacity:.6}
+  100%{transform:scale(1.5);opacity:0}
+}
+.whatsapp-float:hover{transform:scale(1.1);box-shadow:0 15px 40px rgba(37,211,102,.65)}
+.whatsapp-float svg{width:30px;height:30px;color:var(--white)}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:960px){
+  .contact-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .map-embed{height:340px}
+}
+@media (max-width:768px){
+  :root{--section-pad:80px 20px}
+  .nav-links{
+    display:none;position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;align-items:flex-start;gap:0;
+    padding:20px 24px;background:rgba(5,8,16,.98);
+    backdrop-filter:blur(20px);border-bottom:1px solid var(--border);
+  }
+  .nav-links.open{display:flex}
+  .nav-links li{width:100%;padding:14px 0;border-bottom:1px solid var(--border)}
+  .nav-links li:last-child{border-bottom:none}
+  .nav-toggle{display:flex}
+  .nav-cta{display:none}
+  .page-hero{padding:140px 0 70px}
+  .page-hero-blocks .block{opacity:.3}
+  .gallery-full-grid{grid-template-columns:1fr 1fr;gap:14px}
+  .gallery-full-grid .gallery-item .zoom-icon{opacity:1;transform:scale(1);width:30px;height:30px}
+  .lightbox-nav{width:44px;height:44px;font-size:18px}
+  .lightbox-prev{left:12px}
+  .lightbox-next{right:12px}
+  .lightbox-close{top:16px;right:16px}
+  .footer-grid{grid-template-columns:1fr;gap:40px}
+  .whatsapp-float{width:54px;height:54px;bottom:20px;right:20px}
+}
+@media (max-width:480px){
+  .gallery-full-grid{grid-template-columns:1fr}
+  .contact-form{padding:24px}
+  .page-hero h1{font-size:38px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- PAGE LOADER -->
+<div class="page-loader" id="pageLoader">
+  <div class="loader-logo">CAR <span class="accent">COMFORT</span></div>
+  <div class="loader-bar"></div>
+</div>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/carcomfortlogo.png" alt="Car Comfort" onerror="this.style.display='none'" />
+        <span class="nav-logo-text">
+          <span class="brand">CAR COMFORT</span>
+          <span class="tag">The Factory Outlet</span>
+        </span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="gallery.html" class="active">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="tel:9896272747" class="nav-cta">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+        Call Now
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-blocks">
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+  </div>
+  <div class="container">
+    <span class="section-label">Our Portfolio</span>
+    <h1>Recent <span class="accent">Work</span></h1>
+    <p>Real cars, real interiors — seat covers, dashboards, roof cloth, and custom builds from our Karnal studio.</p>
+  </div>
+</section>
+
+<!-- FULL GALLERY -->
+<section class="gallery-full">
+  <div class="container">
+    <div class="gallery-full-grid" id="galleryFullGrid">
+      <div class="loading-state">
+        <div class="spinner"></div>
+        Loading gallery...
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous">‹</button>
+  <img id="lightboxImg" src="" alt="" />
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next">›</button>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <span class="section-label reveal">Get In Touch</span>
+    <h2 class="section-title reveal reveal-delay-1">Visit The Studio</h2>
+    <p class="section-subtitle reveal reveal-delay-2">Drop by or send us a message — we'll get back to you.</p>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item reveal">
+          <div class="icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div>
+            <div class="label">Address</div>
+            <div class="value">30, Mugal Canal Rd, Sector 13 Extension,<br />Sector 13, Karnal, Haryana 132001</div>
+          </div>
+        </div>
+
+        <div class="contact-item reveal reveal-delay-1">
+          <div class="icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          </div>
+          <div>
+            <div class="label">Phone / WhatsApp</div>
+            <div class="value"><a href="tel:9896272747">98962 72747</a></div>
+          </div>
+        </div>
+
+        <div class="contact-item reveal reveal-delay-2">
+          <div class="icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <div class="label">Working Hours</div>
+            <div class="value">Mon–Sat: 9:30 AM – 8:00 PM<br />Sunday: 10:30 AM – 4:00 PM</div>
+          </div>
+        </div>
+
+        <div class="contact-item reveal reveal-delay-3">
+          <div class="icon">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </div>
+          <div>
+            <div class="label">Instagram</div>
+            <div class="value"><a href="https://instagram.com/carcomfort.knl" target="_blank" rel="noopener">@carcomfort.knl</a></div>
+          </div>
+        </div>
+
+        <div class="contact-form reveal reveal-delay-2">
+          <h3>Send a Message</h3>
+          <p>Fill this out and we'll get back to you on WhatsApp or email.</p>
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" required placeholder="e.g. Rohit Kumar" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" required placeholder="e.g. 98765 43210" />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required placeholder="Tell us about your car and what you need..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              Send Message
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+            </button>
+            <div class="form-status" id="formStatus"></div>
+          </form>
+        </div>
+      </div>
+
+      <div class="map-embed reveal reveal-delay-2">
+        <iframe src="https://www.google.com/maps?q=29.6784840,76.9917755&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Car Comfort Location"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/carcomfortlogo.png" alt="Car Comfort" onerror="this.style.display='none'" />
+        <span class="nav-logo-text"><span class="brand">CAR COMFORT</span><span class="tag">The Factory Outlet</span></span>
+      </a>
+      <p>A Unique Car Interior Studio in Karnal. Premium seat covers, dashboard styling, roof cloth & custom car interiors — factory direct.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:9896272747">98962 72747</a></li>
+        <li><a href="https://instagram.com/carcomfort.knl" target="_blank" rel="noopener">@carcomfort.knl</a></li>
+        <li><a href="https://maps.app.goo.gl/Ghg2eUx4K1GWJE6G6" target="_blank" rel="noopener">Get Directions</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© <span id="year"></span> Car Comfort · The Factory Outlet. All rights reserved.</div>
+    <div>Site by <a href="https://vaanconsultancy.in" target="_blank" rel="noopener">VAAN Consultancy</a></div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/919896272747?text=Hi%20Car%20Comfort%2C%20I%20want%20to%20know%20about%20your%20car%20interior%20services." target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
+  <svg fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+/* ============================================================
+   CAR COMFORT — GALLERY.JS
+   ============================================================ */
+
+// ---------- CONFIG ----------
+// Fill these after Supabase setup
+const SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';
+const SUPABASE_ANON_KEY = 'YOUR-ANON-KEY-HERE';
+
+// Web3Forms: get a free key at web3forms.com
+const WEB3FORMS_KEY = 'YOUR-WEB3FORMS-ACCESS-KEY';
+// ----------------------------
+
+// ---------- PAGE LOADER ----------
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const loader = document.getElementById('pageLoader');
+    if (loader) loader.classList.add('hidden');
+  }, 900);
+});
+
+// ---------- YEAR ----------
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// ---------- HEADER SCROLL ----------
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 30);
+}, { passive: true });
+
+// ---------- MOBILE MENU ----------
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+if (navToggle && navLinks) {
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    navToggle.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.classList.remove('open');
+    });
+  });
+}
+
+// ---------- SCROLL REVEAL ----------
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ---------- GALLERY LOAD ----------
+const galleryGrid = document.getElementById('galleryFullGrid');
+let galleryImages = [];
+let currentIndex = 0;
+
+async function loadGallery() {
+  // If Supabase not configured yet → show clean empty state (no fake photos)
+  if (SUPABASE_URL.includes('YOUR-PROJECT')) {
+    renderEmptyState();
+    return;
+  }
+
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/gallery?select=*&order=sort_order.asc,created_at.desc`,
+      {
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      }
+    );
+
+    if (!res.ok) throw new Error('Failed to load');
+    const data = await res.json();
+
+    if (!data.length) {
+      renderEmptyState();
+      return;
+    }
+
+    galleryImages = data.map(item => ({
+      url: item.image_url,
+      caption: item.caption || ''
+    }));
+
+    renderGallery(galleryImages);
+  } catch (err) {
+    console.error('Gallery load error:', err);
+    renderEmptyState();
+  }
+}
+
+function renderGallery(images) {
+  galleryGrid.innerHTML = images.map((img, i) => `
+    <div class="gallery-item" data-index="${i}">
+      <img src="${img.url}" alt="${escapeHtml(img.caption || 'Car interior work')}" loading="lazy" />
+      <div class="zoom-icon">
+        <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+      </div>
+      ${img.caption ? `<div class="caption">${escapeHtml(img.caption)}</div>` : ''}
+    </div>
+  `).join('');
+
+  // Staggered entrance
+  requestAnimationFrame(() => {
+    galleryGrid.querySelectorAll('.gallery-item').forEach((el, i) => {
+      setTimeout(() => el.classList.add('in'), i * 90);
+    });
+  });
+
+  // Click → lightbox
+  galleryGrid.querySelectorAll('.gallery-item').forEach(el => {
+    el.addEventListener('click', () => openLightbox(parseInt(el.dataset.index)));
+  });
+}
+
+function renderEmptyState() {
+  galleryGrid.innerHTML = `
+    <div class="empty-state">
+      <div class="empty-icon">
+        <svg fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      </div>
+      <h3>Gallery is being updated</h3>
+      <p>We're putting together fresh photos of our recent work. Check back soon — or reach out on WhatsApp for a quick look at what we do.</p>
+      <a href="https://wa.me/919896272747?text=Hi%20Car%20Comfort%2C%20I%20want%20to%20see%20your%20recent%20work." target="_blank" rel="noopener" class="btn btn-primary">
+        <svg fill="currentColor" viewBox="0 0 24 24" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Message Us
+      </a>
+    </div>
+  `;
+}
+
+// ---------- LIGHTBOX ----------
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxCaption = document.getElementById('lightboxCaption');
+const lightboxCounter = document.getElementById('lightboxCounter');
+
+function openLightbox(index) {
+  currentIndex = index;
+  updateLightbox();
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function updateLightbox() {
+  const img = galleryImages[currentIndex];
+  if (!img) return;
+  lightboxImg.src = img.url;
+  lightboxImg.alt = img.caption || '';
+  lightboxCaption.textContent = img.caption || '';
+  lightboxCounter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
+}
+
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+document.getElementById('lightboxPrev').addEventListener('click', (e) => {
+  e.stopPropagation();
+  currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+  updateLightbox();
+});
+document.getElementById('lightboxNext').addEventListener('click', (e) => {
+  e.stopPropagation();
+  currentIndex = (currentIndex + 1) % galleryImages.length;
+  updateLightbox();
+});
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length; updateLightbox(); }
+  if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % galleryImages.length; updateLightbox(); }
+});
+
+// ---------- CONTACT FORM ----------
+const contactForm = document.getElementById('contactForm');
+const formStatus = document.getElementById('formStatus');
+const submitBtn = document.getElementById('submitBtn');
+
+contactForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  formStatus.textContent = '';
+  formStatus.className = 'form-status';
+
+  if (WEB3FORMS_KEY.includes('YOUR-')) {
+    formStatus.textContent = '⚠ Form not configured yet. Please call or WhatsApp us directly.';
+    formStatus.classList.add('error');
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending...';
+
+  const formData = new FormData(contactForm);
+  formData.append('access_key', WEB3FORMS_KEY);
+  formData.append('subject', 'New enquiry from Car Comfort website');
+  formData.append('from_name', 'Car Comfort Website');
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData
+    });
+    const data = await res.json();
+
+    if (data.success) {
+      formStatus.textContent = '✓ Message sent! We\'ll get back to you soon.';
+      formStatus.classList.add('success');
+      contactForm.reset();
+    } else {
+      throw new Error(data.message || 'Failed');
+    }
+  } catch (err) {
+    formStatus.textContent = '✕ Something went wrong. Please call us at 98962 72747.';
+    formStatus.classList.add('error');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = 'Send Message <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="width:18px;height:18px"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>';
+  }
+});
+
+// ---------- UTILITY ----------
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+// ---------- INIT ----------
+loadGallery();
+</script>
+</body>
+</html>
