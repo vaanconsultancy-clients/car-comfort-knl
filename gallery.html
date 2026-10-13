@@ -50,9 +50,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .container{max-width:var(--container);margin:0 auto;padding:0 24px}
 h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;letter-spacing:-.02em}
 
-/* ============================================================
-   PAGE LOADER
-   ============================================================ */
+/* PAGE LOADER */
 .page-loader{
   position:fixed;inset:0;z-index:10000;background:var(--black);
   display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px;
@@ -75,9 +73,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 @keyframes loaderFadeIn{to{opacity:1}}
 @keyframes loaderFill{to{width:100%}}
 
-/* ============================================================
-   SCROLL REVEAL
-   ============================================================ */
+/* SCROLL REVEAL */
 .reveal{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
 .reveal.in{opacity:1;transform:translateY(0)}
 .reveal-delay-1{transition-delay:.1s}
@@ -87,9 +83,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 .reveal-delay-5{transition-delay:.5s}
 .reveal-delay-6{transition-delay:.6s}
 
-/* ============================================================
-   HEADER
-   ============================================================ */
+/* HEADER */
 .header{
   position:fixed;top:0;left:0;right:0;z-index:1000;
   padding:20px 0;
@@ -136,9 +130,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 .nav-toggle.open span:nth-child(2){opacity:0}
 .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-/* ============================================================
-   PAGE HERO
-   ============================================================ */
+/* PAGE HERO */
 .page-hero{
   position:relative;padding:180px 0 100px;
   background:radial-gradient(circle at 30% 20%,rgba(30,111,217,.15),transparent 55%),
@@ -195,9 +187,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
   opacity:0;animation:heroFadeUp 1s .1s cubic-bezier(.16,1,.3,1) forwards;
 }
 
-/* ============================================================
-   FULL GALLERY
-   ============================================================ */
+/* FULL GALLERY */
 .gallery-full{padding:80px 0 120px;background:var(--black);position:relative}
 .gallery-full-grid{
   display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
@@ -267,9 +257,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 .empty-state h3{font-size:22px;margin-bottom:10px;color:var(--white)}
 .empty-state p{font-size:15px;color:var(--gray);max-width:420px;margin:0 auto 24px;line-height:1.7}
 
-/* ============================================================
-   LIGHTBOX
-   ============================================================ */
+/* LIGHTBOX */
 .lightbox{
   position:fixed;inset:0;z-index:2000;background:rgba(3,5,10,.97);
   display:none;align-items:center;justify-content:center;padding:40px 20px;
@@ -312,9 +300,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
   border:1px solid rgba(255,255,255,.1);
 }
 
-/* ============================================================
-   CONTACT
-   ============================================================ */
+/* CONTACT */
 .contact{padding:var(--section-pad);background:var(--black);position:relative}
 .section-label{
   display:inline-flex;align-items:center;gap:12px;
@@ -394,9 +380,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 }
 .btn svg{width:18px;height:18px}
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
+/* FOOTER */
 .footer{padding:72px 24px 36px;background:var(--navy);border-top:1px solid var(--border)}
 .footer-grid{
   display:grid;grid-template-columns:2fr 1fr 1fr;gap:56px;
@@ -418,9 +402,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 }
 .footer-bottom a{color:var(--blue-bright)}
 
-/* ============================================================
-   WHATSAPP FLOAT
-   ============================================================ */
+/* WHATSAPP FLOAT */
 .whatsapp-float{
   position:fixed;bottom:28px;right:28px;z-index:999;
   width:60px;height:60px;display:flex;align-items:center;justify-content:center;
@@ -439,9 +421,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 .whatsapp-float:hover{transform:scale(1.1);box-shadow:0 15px 40px rgba(37,211,102,.65)}
 .whatsapp-float svg{width:30px;height:30px;color:var(--white)}
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
+/* RESPONSIVE */
 @media (max-width:960px){
   .contact-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
@@ -667,7 +647,6 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
   </div>
 </footer>
 
-<!-- WhatsApp Float -->
 <a href="https://wa.me/919896272747?text=Hi%20Car%20Comfort%2C%20I%20want%20to%20know%20about%20your%20car%20interior%20services." target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
   <svg fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
@@ -675,12 +654,12 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 <script>
 /* ============================================================
    CAR COMFORT — GALLERY.JS
+   Supabase keys integrated.
    ============================================================ */
 
 // ---------- CONFIG ----------
-// Fill these after Supabase setup
-const SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR-ANON-KEY-HERE';
+const SUPABASE_URL = 'https://hdvecixkfmbbnilurwns.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkdmVjaXhrZm1iYm5pbHVyd25zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE4ODU2ODksImV4cCI6MjEwNzQ2MTY4OX0.EKyYByXVVUviB_6oAH-fJP0vfUGaNJMForuKmB2r5IU';
 // ----------------------------
 
 // ---------- PAGE LOADER ----------
@@ -734,15 +713,9 @@ let galleryImages = [];
 let currentIndex = 0;
 
 async function loadGallery() {
-  // If Supabase not configured yet → show clean empty state (no fake photos)
-  if (SUPABASE_URL.includes('YOUR-PROJECT')) {
-    renderEmptyState();
-    return;
-  }
-
   try {
     const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/gallery?select=*&order=sort_order.asc,created_at.desc`,
+      `${SUPABASE_URL}/rest/v1/carcomfort_gallery?select=*&order=sort_order.asc,created_at.desc`,
       {
         headers: {
           apikey: SUPABASE_ANON_KEY,
@@ -782,14 +755,12 @@ function renderGallery(images) {
     </div>
   `).join('');
 
-  // Staggered entrance
   requestAnimationFrame(() => {
     galleryGrid.querySelectorAll('.gallery-item').forEach((el, i) => {
       setTimeout(() => el.classList.add('in'), i * 90);
     });
   });
 
-  // Click → lightbox
   galleryGrid.querySelectorAll('.gallery-item').forEach(el => {
     el.addEventListener('click', () => openLightbox(parseInt(el.dataset.index)));
   });
