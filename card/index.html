@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover" />
 <meta name="theme-color" content="#050a1a" />
 <title>Car Comfort — The Factory Outlet | Karnal</title>
-<meta name="description" content="Car Comfort — A Unique Car Interior Studio. Seat covers, roof cloth, dashboard, gear cover & khob leather. Karnal." />
+<meta name="description" content="Car Comfort — A Unique Car Interior Studio. Seat covers, steering wheel wrap, roof cloth, dashboard, gear cover & knob leather. Karnal." />
 
 <!-- Open Graph -->
 <meta property="og:title" content="Car Comfort — The Factory Outlet" />
@@ -77,7 +77,6 @@ body.locked{overflow:hidden;height:100vh;}
 .layer-back{
   position:absolute;
   inset:-40px;
-  background-image:url('carc Comfort.png');
   background-image:url('carcomfort.png');
   background-size:contain;
   background-position:center;
@@ -233,7 +232,7 @@ body.locked{overflow:hidden;height:100vh;}
   padding:0 20px;
 }
 
-/* Gold/blue flash */
+/* Blue flash */
 .flash{
   position:absolute;
   inset:0;
@@ -680,9 +679,7 @@ body.locked{overflow:hidden;height:100vh;}
 </head>
 <body class="locked">
 
-<!-- ══════════════════════════════════════════════════════════
-     STAGE — CINEMATIC OPENING
-     ══════════════════════════════════════════════════════════ -->
+<!-- STAGE — CINEMATIC OPENING -->
 <div id="stage">
   <div class="layer-back"></div>
   <div class="layer-front" id="layerFront"></div>
@@ -711,9 +708,7 @@ body.locked{overflow:hidden;height:100vh;}
   <button id="skipBtn" type="button">Skip ›</button>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════
-     CARD
-     ══════════════════════════════════════════════════════════ -->
+<!-- CARD -->
 <div id="cardWrap">
   <div class="card">
 
@@ -779,11 +774,11 @@ body.locked{overflow:hidden;height:100vh;}
     <div class="section">
       <div class="sec-label">Services</div>
       <div class="svc-grid">
+        <div class="svc-item">Seat Cover</div>
+        <div class="svc-item">Steering Wheel Wrap</div>
         <div class="svc-item">Door Panel &amp; Dashboard</div>
         <div class="svc-item">Roof Cloth</div>
-        <div class="svc-item">Seat Cover</div>
-        <div class="svc-item">Gear Cover</div>
-        <div class="svc-item">Khob Leather</div>
+        <div class="svc-item">Gear Cover &amp; Knob Leather</div>
         <div class="svc-item">Custom Interior</div>
       </div>
     </div>
@@ -862,9 +857,7 @@ body.locked{overflow:hidden;height:100vh;}
   function doSkip(){
     if(skipped) return;
     skipped = true;
-    // kill all animations
     if(window.gsap) gsap.globalTimeline.clear();
-    // hide stage
     stage.style.transition = 'opacity .4s ease';
     stage.style.opacity = '0';
     setTimeout(() => {
@@ -916,63 +909,44 @@ body.locked{overflow:hidden;height:100vh;}
   window.addEventListener('resize', resize);
 
   /* ---- Assembled shape: shield + seat (matches logo) ---- */
-  // normalized coords (-1..1). Shield outline + seat silhouette inside.
   const shieldPts = [];
   const N = 180;
   for(let i=0;i<N;i++){
     const t = (i/N) * Math.PI * 2;
-    // shield: rounded top, pointed bottom
-    // use parametric: top half circle, bottom half V-taper
-    const a = t - Math.PI/2; // start at top
+    const a = t - Math.PI/2;
     let x, y;
-    if(Math.cos(a) >= 0){
-      // right side
-      x = 0.55 * Math.cos(a) * (1 + 0.15*Math.sin(a));
-      y = 0.75 * Math.sin(a);
-      if(y > 0.15) y = 0.15 + (y - 0.15) * (1 - 0.5*(y-0.15));
-    } else {
-      x = 0.55 * Math.cos(a) * (1 + 0.15*Math.sin(a));
-      y = 0.75 * Math.sin(a);
-      if(y > 0.15) y = 0.15 + (y - 0.15) * (1 - 0.5*(y-0.15));
-    }
+    x = 0.55 * Math.cos(a) * (1 + 0.15*Math.sin(a));
+    y = 0.75 * Math.sin(a);
+    if(y > 0.15) y = 0.15 + (y - 0.15) * (1 - 0.5*(y-0.15));
     shieldPts.push({x, y});
   }
 
-  // seat silhouette points (headrest + back + seat base)
   const seatPts = [];
-  // headrest (rounded rect)
   for(let i=0;i<20;i++){
     const t = (i/20)*Math.PI*2;
     seatPts.push({x: 0.16*Math.cos(t), y: -0.42 + 0.11*Math.sin(t)});
   }
-  // back top arc
   for(let i=0;i<30;i++){
     const t = Math.PI + (i/30)*Math.PI;
     seatPts.push({x: 0.32*Math.cos(t), y: -0.28 + 0.22*Math.sin(t)});
   }
-  // right side down
   for(let i=0;i<12;i++){
     seatPts.push({x: 0.32 - i*0.008, y: -0.06 + i*0.035});
   }
-  // seat base right
   for(let i=0;i<14;i++){
     const t = (i/14)*(Math.PI/2);
     seatPts.push({x: 0.24 + 0.18*Math.sin(t), y: 0.35 + 0.06*Math.cos(t)});
   }
-  // seat base bottom
   for(let i=0;i<16;i++){
     seatPts.push({x: 0.42 - i*0.055, y: 0.41});
   }
-  // seat base left
   for(let i=0;i<14;i++){
     const t = (i/14)*(Math.PI/2);
     seatPts.push({x: -0.42 + 0.18*(1-Math.cos(t)), y: 0.35 + 0.06*Math.sin(t)});
   }
-  // left side up
   for(let i=0;i<12;i++){
     seatPts.push({x: -0.32 + i*0.008, y: 0.35 - i*0.035});
   }
-  // back left arc
   for(let i=0;i<30;i++){
     const t = (i/30)*Math.PI;
     seatPts.push({x: -0.32*Math.cos(t), y: -0.28 + 0.22*Math.sin(t)});
@@ -981,7 +955,6 @@ body.locked{overflow:hidden;height:100vh;}
   const TARGETS = shieldPts.concat(seatPts);
   const TOTAL = TARGETS.length;
 
-  // particles
   const particles = [];
   const colors = ['#3b9bff','#5fb4ff','#1a6fd4','#eaf2ff','#c9d6e8','#7cc0ff'];
   const PCOUNT = Math.min(TOTAL, window.innerWidth < 640 ? 160 : 260);
@@ -1031,7 +1004,6 @@ body.locked{overflow:hidden;height:100vh;}
         p.x = p.sx + (p.tx - p.sx) * e;
         p.y = p.sy + (p.ty - p.sy) * e;
       } else {
-        // idle drift
         p.x += Math.sin(time + p.twinkle) * 0.0008;
         p.y += Math.cos(time + p.twinkle) * 0.0008;
       }
@@ -1041,7 +1013,6 @@ body.locked{overflow:hidden;height:100vh;}
       const tw = 0.6 + 0.4 * Math.sin(time*3 + p.twinkle);
       const alpha = particleAlpha * tw;
 
-      // glow
       const g = pCtx.createRadialGradient(px, py, 0, px, py, p.size * 4);
       g.addColorStop(0, p.color);
       g.addColorStop(1, 'rgba(0,0,0,0)');
@@ -1051,7 +1022,6 @@ body.locked{overflow:hidden;height:100vh;}
       pCtx.arc(px, py, p.size * 4, 0, Math.PI*2);
       pCtx.fill();
 
-      // core
       pCtx.globalAlpha = alpha;
       pCtx.fillStyle = p.color;
       pCtx.beginPath();
@@ -1106,7 +1076,7 @@ body.locked{overflow:hidden;height:100vh;}
   }
   drawRays();
 
-  /* ---------- PARALLAX (mouse + device tilt) ---------- */
+  /* ---------- PARALLAX ---------- */
   const layerBack = document.querySelector('.layer-back');
   let mouseX = 0, mouseY = 0;
   function applyParallax(){
@@ -1135,7 +1105,6 @@ body.locked{overflow:hidden;height:100vh;}
 
     const tl = gsap.timeline({
       onComplete: () => {
-        // hide stage
         stage.classList.add('hidden');
         body.classList.remove('locked');
         cardWrap.classList.add('revealed');
@@ -1145,28 +1114,15 @@ body.locked{overflow:hidden;height:100vh;}
       }
     });
 
-    // 0.0 — stage fades from black
     gsap.set(stage, {opacity:1});
 
-    // 0.3 — layer back subtle zoom
     tl.fromTo(layerBack, {scale:1.3, opacity:0}, {scale:1.18, opacity:1, duration:1.2, ease:'power2.out'}, 0.3);
-
-    // 1.4 — crisp image fades in
     tl.to(layerFront, {opacity:1, scale:1.04, duration:1.0, ease:'power2.out'}, 1.4);
-
-    // 2.0 — camera drift
     tl.to(layerFront, {x:'2%', y:'1%', duration:0.6, ease:'sine.inOut'}, 2.0);
-
-    // 1.0 — HUD corners
     tl.to(['#hudTL','#hudTR','#hudBL','#hudBR'], {opacity:1, duration:0.6, stagger:0.08}, 1.0);
-
-    // 1.8 — skip button
     tl.call(() => skipBtn.classList.add('show'), null, 1.8);
-
-    // 2.0 — camera drift right
     tl.to(layerFront, {x:'-2%', duration:0.6, ease:'sine.inOut'}, 2.0);
 
-    // 2.6 — breath burst from center (particle explosion)
     tl.call(() => {
       particles.forEach(p => {
         const a = Math.random() * Math.PI * 2;
@@ -1177,7 +1133,6 @@ body.locked{overflow:hidden;height:100vh;}
       });
     }, null, 2.6);
 
-    // 2.7 — shockwave
     tl.call(() => {
       gsap.fromTo(shockwave,
         {opacity:0.9, scale:0, marginLeft:-10, marginTop:-10},
@@ -1185,14 +1140,11 @@ body.locked{overflow:hidden;height:100vh;}
       );
     }, null, 2.7);
 
-    // 2.8 — camera zoom in dramatically
     tl.to(layerFront, {scale:1.35, duration:1.0, ease:'power2.in'}, 2.8);
     tl.to(layerBack, {scale:1.5, duration:1.0, ease:'power2.in'}, 2.8);
 
-    // 3.4 — particle assembly starts
     tl.call(() => { assemblyActive = true; }, null, 3.4);
 
-    // 3.6 — opening logo spins in 3D
     tl.to(openLogo, {
       opacity:1,
       scale:1,
@@ -1201,11 +1153,9 @@ body.locked{overflow:hidden;height:100vh;}
       ease:'back.out(1.6)'
     }, 3.6);
 
-    // 4.2 — camera pulls back, logo takes over
     tl.to(layerFront, {scale:1.05, opacity:0.35, duration:0.7, ease:'power2.out'}, 4.2);
     tl.to(layerBack, {scale:1.2, opacity:0.5, duration:0.7, ease:'power2.out'}, 4.2);
 
-    // 4.5 — cinematic title flashes
     tl.fromTo(cineTitle,
       {opacity:0, scale:0.9, letterSpacing:'0.3em'},
       {opacity:1, scale:1, letterSpacing:'0.04em', duration:0.7, ease:'power2.out'},
@@ -1213,10 +1163,8 @@ body.locked{overflow:hidden;height:100vh;}
     );
     tl.to(cineTitle, {opacity:0, duration:0.5, ease:'power2.in'}, 5.1);
 
-    // 5.2 — background fades to low opacity
     tl.to([layerFront, layerBack], {opacity:0.15, duration:0.6, ease:'power2.inOut'}, 5.2);
 
-    // 5.5 — logo shimmers
     tl.to(openLogo, {
       filter:'drop-shadow(0 0 60px rgba(95,180,255,1)) brightness(1.3)',
       duration:0.3,
@@ -1225,7 +1173,6 @@ body.locked{overflow:hidden;height:100vh;}
       ease:'power2.inOut'
     }, 5.5);
 
-    // 6.2 — particles fade
     tl.to({}, {
       duration:0.6,
       onUpdate: function(){
@@ -1233,12 +1180,10 @@ body.locked{overflow:hidden;height:100vh;}
       }
     }, 6.2);
 
-    // 6.4 — logo zooms + gold flash
     tl.to(openLogo, {scale:1.6, opacity:0, duration:0.5, ease:'power2.in'}, 6.4);
     tl.to(flash, {opacity:1, duration:0.15, ease:'power2.in'}, 6.5);
     tl.to(flash, {opacity:0, duration:0.4, ease:'power2.out'}, 6.7);
 
-    // 6.9 — stage hides, card reveals
     tl.call(() => {
       stage.classList.add('hidden');
       body.classList.remove('locked');
@@ -1266,7 +1211,7 @@ body.locked{overflow:hidden;height:100vh;}
         await navigator.clipboard.writeText(CARD_URL);
         flashCopied('btnShare');
       }
-    }catch(e){ /* user cancelled */ }
+    }catch(e){}
   });
 
   document.getElementById('btnCopy').addEventListener('click', async () => {
@@ -1274,7 +1219,6 @@ body.locked{overflow:hidden;height:100vh;}
       await navigator.clipboard.writeText(CARD_URL);
       flashCopied('btnCopy');
     }catch(e){
-      // fallback
       const ta = document.createElement('textarea');
       ta.value = CARD_URL;
       document.body.appendChild(ta);
@@ -1307,7 +1251,7 @@ body.locked{overflow:hidden;height:100vh;}
       'TITLE:Owner — Car Interior Studio',
       'TEL;TYPE=CELL,VOICE:+919896272747',
       'URL:' + CARD_URL,
-      'NOTE:A Unique Car Interior Studio. Services: Door Panel/Dashboard, Roof Cloth, Seat Cover, Gear Cover, Khob Leather. Address: 30, Mugal Canal Rd, Sector 13 Extension, Sector 13, Karnal, Haryana 132001. Hours: Mon-Sat 9:30AM-8:00PM, Sun 10:30AM-4:00PM.',
+      'NOTE:A Unique Car Interior Studio. Services: Seat Cover, Steering Wheel Wrap, Door Panel/Dashboard, Roof Cloth, Gear Cover & Knob Leather, Custom Interior. Address: 30, Mugal Canal Rd, Sector 13 Extension, Sector 13, Karnal, Haryana 132001. Hours: Mon-Sat 9:30AM-8:00PM, Sun 10:30AM-4:00PM.',
       'ADR;TYPE=WORK:;;30, Mugal Canal Rd, Sector 13 Extension;Karnal;Haryana;132001;India',
       'END:VCARD'
     ].join('\r\n');
