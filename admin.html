@@ -447,9 +447,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.2;lett
 </head>
 <body>
 
-<!-- ============================================================
-     LOGIN SCREEN
-     ============================================================ -->
+<!-- LOGIN SCREEN -->
 <div class="login-screen" id="loginScreen">
   <div class="login-box">
     <div class="logo">
@@ -476,12 +474,9 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.2;lett
   </div>
 </div>
 
-<!-- ============================================================
-     DASHBOARD
-     ============================================================ -->
+<!-- DASHBOARD -->
 <div class="dashboard" id="dashboard">
 
-  <!-- Topbar -->
   <div class="topbar">
     <div class="topbar-inner">
       <div class="logo">
@@ -505,7 +500,6 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.2;lett
     </div>
   </div>
 
-  <!-- Tabs -->
   <div class="tabs">
     <div class="tabs-inner">
       <button class="tab active" data-tab="gallery">
@@ -519,11 +513,10 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.2;lett
     </div>
   </div>
 
-  <!-- Content -->
   <div class="content">
     <div class="content-inner">
 
-      <!-- ================= GALLERY TAB ================= -->
+      <!-- GALLERY TAB -->
       <div class="tab-panel active" id="panel-gallery">
         <div class="section-head">
           <div>
@@ -547,7 +540,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.2;lett
         </div>
       </div>
 
-      <!-- ================= PRICING TAB ================= -->
+      <!-- PRICING TAB -->
       <div class="tab-panel" id="panel-pricing">
         <div class="section-head">
           <div>
@@ -585,17 +578,11 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.2;lett
   </div>
 </div>
 
-<!-- ============================================================
-     LOADING OVERLAY
-     ============================================================ -->
 <div class="loading-overlay" id="loadingOverlay">
   <div class="spinner"></div>
   <p id="loadingText">Working…</p>
 </div>
 
-<!-- ============================================================
-     CONFIRM MODAL
-     ============================================================ -->
 <div class="modal-backdrop" id="modalBackdrop">
   <div class="modal">
     <h3 id="modalTitle">Confirm</h3>
@@ -607,43 +594,36 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.2;lett
   </div>
 </div>
 
-<!-- ============================================================
-     TOAST
-     ============================================================ -->
 <div class="toast" id="toast"></div>
 
 <script>
 /* ============================================================
    CAR COMFORT — ADMIN.JS
-   Password is verified server-side via Supabase RPC.
+   Password verified server-side via Supabase RPC.
    No password string appears in this file.
    ============================================================ */
 
 // ============================================================
-// CONFIG — fill these two after Supabase setup
+// CONFIG — your Supabase project
 // ============================================================
-const SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR-ANON-KEY-HERE';
+const SUPABASE_URL = 'https://hdvecixkfmbbnilurwns.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkdmVjaXhrZm1iYm5pbHVyd25zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE4ODU2ODksImV4cCI6MjEwNzQ2MTY4OX0.EKyYByXVVUviB_6oAH-fJP0vfUGaNJMForuKmB2r5IU';
 
-// Table + bucket names (prefixed so you can stack other clients)
 const TABLES = {
   gallery: 'carcomfort_gallery',
   services: 'carcomfort_services'
 };
 const STORAGE_BUCKET = 'carcomfort-photos';
 
-// Limits
 const PHOTO_LIMIT = 15;
 const MAX_FILE_SIZE = 2 * 1024 * 1024;
 const COMPRESS_MAX_WIDTH = 1400;
 const COMPRESS_QUALITY = 0.82;
 // ============================================================
 
-// ---------- SHORTCUTS ----------
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => document.querySelectorAll(sel);
 
-// ---------- UTILITIES ----------
 function escapeHtml(str) {
   if (!str) return '';
   return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -689,7 +669,6 @@ function showConfirm(title, message, onConfirm) {
   $('#modalCancel').addEventListener('click', handleCancel);
 }
 
-// Image compression via canvas
 function compressImage(file, maxW = COMPRESS_MAX_WIDTH, quality = COMPRESS_QUALITY) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -720,7 +699,7 @@ function compressImage(file, maxW = COMPRESS_MAX_WIDTH, quality = COMPRESS_QUALI
 }
 
 // ============================================================
-// SUPABASE HELPERS (REST API — no SDK)
+// SUPABASE HELPERS
 // ============================================================
 const apiHeaders = {
   'apikey': SUPABASE_ANON_KEY,
@@ -729,9 +708,7 @@ const apiHeaders = {
 };
 
 async function dbGet(table, query = '') {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?${query}`, {
-    headers: apiHeaders
-  });
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?${query}`, { headers: apiHeaders });
   if (!res.ok) {
     const err = await res.text();
     throw new Error(`GET ${table} failed: ${err}`);
@@ -818,21 +795,13 @@ function filenameFromUrl(url) {
 
 // ============================================================
 // PASSWORD CHECK VIA SUPABASE RPC
-// No password is stored in this file. The DB compares the hash.
 // ============================================================
 async function verifyPassword(input) {
-  if (SUPABASE_URL.includes('YOUR-PROJECT')) {
-    throw new Error('Supabase not configured. Add URL + anon key at the top of admin.html.');
-  }
-
   const res = await fetch(
     `${SUPABASE_URL}/rest/v1/rpc/carcomfort_check_admin_password`,
     {
       method: 'POST',
-      headers: {
-        ...apiHeaders,
-        'Content-Type': 'application/json'
-      },
+      headers: apiHeaders,
       body: JSON.stringify({ input_password: input })
     }
   );
@@ -847,7 +816,7 @@ async function verifyPassword(input) {
 }
 
 // ============================================================
-// AUTH — session-gated, no local password
+// AUTH
 // ============================================================
 const loginScreen = $('#loginScreen');
 const dashboard = $('#dashboard');
@@ -932,16 +901,6 @@ async function loadGallery() {
     grid.innerHTML = `<div class="empty" style="grid-column:1/-1"><p>Loading photos…</p></div>`;
   }
 
-  if (SUPABASE_URL.includes('YOUR-PROJECT')) {
-    grid.innerHTML = `
-      <div class="empty" style="grid-column:1/-1">
-        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        <h4>Supabase not configured</h4>
-        <p>Add your Supabase URL and anon key at the top of <code>admin.html</code> to enable uploads.</p>
-      </div>`;
-    return;
-  }
-
   try {
     const data = await dbGet(TABLES.gallery, 'select=*&order=sort_order.asc,created_at.desc');
     galleryPhotos = data;
@@ -954,7 +913,7 @@ async function loadGallery() {
       <div class="empty" style="grid-column:1/-1">
         <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         <h4>Could not load gallery</h4>
-        <p>Check your Supabase config or RLS policies.</p>
+        <p>${escapeHtml(err.message)}</p>
       </div>`;
   }
 }
@@ -999,7 +958,6 @@ function renderGallery() {
     </div>
   `).join('');
 
-  // Delete buttons
   grid.querySelectorAll('[data-action="delete"]').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -1024,7 +982,6 @@ function renderGallery() {
     });
   });
 
-  // Caption edits (save on blur)
   grid.querySelectorAll('[data-action="caption"]').forEach(input => {
     input.addEventListener('blur', async () => {
       const id = input.dataset.id;
@@ -1046,7 +1003,7 @@ function renderGallery() {
 }
 
 // ============================================================
-// UPLOAD HANDLING
+// UPLOAD
 // ============================================================
 const uploadArea = $('#uploadArea');
 const fileInput = $('#fileInput');
@@ -1091,7 +1048,6 @@ async function handleFiles(files) {
 
       let blob = await compressImage(file);
 
-      // If still over 2MB, compress harder
       if (blob.size > MAX_FILE_SIZE) {
         blob = await compressImage(file, 1100, 0.7);
         if (blob.size > MAX_FILE_SIZE * 1.2) {
@@ -1136,13 +1092,6 @@ async function loadPricing() {
   const tbody = $('#pricingBody');
   if (!pricingLoaded) {
     tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;color:var(--gray);padding:24px;background:transparent;border:none">Loading services…</td></tr>`;
-  }
-
-  if (SUPABASE_URL.includes('YOUR-PROJECT')) {
-    tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;color:var(--yellow);padding:24px;background:transparent;border:none">Supabase not configured — add your keys to enable saving.</td></tr>`;
-    pricingRows = defaultServices();
-    renderPricing();
-    return;
   }
 
   try {
@@ -1191,7 +1140,6 @@ function renderPricing() {
     </tr>
   `).join('');
 
-  // Field edits
   tbody.querySelectorAll('input').forEach(inp => {
     inp.addEventListener('input', (e) => {
       const tr = e.target.closest('tr');
@@ -1201,7 +1149,6 @@ function renderPricing() {
     });
   });
 
-  // Delete row
   tbody.querySelectorAll('[data-action="delete-row"]').forEach(btn => {
     btn.addEventListener('click', () => {
       const idx = parseInt(btn.dataset.index);
@@ -1227,11 +1174,6 @@ $('#addServiceBtn').addEventListener('click', () => {
 });
 
 $('#savePricingBtn').addEventListener('click', async () => {
-  if (SUPABASE_URL.includes('YOUR-PROJECT')) {
-    toast('Supabase not configured. Cannot save.', 'error');
-    return;
-  }
-
   const clean = pricingRows
     .map((r, i) => ({
       name: (r.name || '').trim(),
@@ -1274,7 +1216,6 @@ function initDashboard() {
   loadGallery();
 }
 
-// Boot
 bootIfAuthed();
 </script>
 </body>
