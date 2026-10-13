@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin — Car Comfort</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/png" href="assets/carcomfortlogo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   CAR COMFORT — ADMIN.HTML STYLES
+   ============================================================ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0a1628;
+  --navy-light:#142b47;
+  --navy-mid:#0e1e35;
+  --black:#050810;
+  --blue:#1e6fd9;
+  --blue-bright:#2d8cff;
+  --blue-glow:rgba(45,140,255,.35);
+  --white:#fff;
+  --gray:#8892a6;
+  --gray-light:#c5cddb;
+  --border:rgba(255,255,255,.08);
+  --border-bright:rgba(45,140,255,.35);
+  --red:#ff5c5c;
+  --green:#25D366;
+  --yellow:#ffb84d;
+  --font-main:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --font-display:'Space Grotesk','Inter',sans-serif;
+  --radius:12px;
+  --transition:all .25s cubic-bezier(.4,0,.2,1);
+}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--font-main);background:var(--black);color:var(--white);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none;transition:var(--transition)}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea,select{font-family:inherit}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.2;letter-spacing:-.02em}
+::selection{background:var(--blue-bright);color:var(--white)}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--black)}
+::-webkit-scrollbar-thumb{background:var(--navy-light);border-radius:10px}
+::-webkit-scrollbar-thumb:hover{background:var(--blue)}
+
+/* ============================================================
+   LOGIN SCREEN
+   ============================================================ */
+.login-screen{
+  position:fixed;inset:0;z-index:100;
+  display:flex;align-items:center;justify-content:center;padding:24px;
+  background:
+    radial-gradient(circle at 30% 30%,rgba(30,111,217,.18),transparent 55%),
+    radial-gradient(circle at 70% 70%,rgba(45,140,255,.12),transparent 55%),
+    var(--black);
+  transition:opacity .5s ease,visibility .5s ease;
+}
+.login-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.login-screen::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(circle at center,black 30%,transparent 75%);
+  -webkit-mask-image:radial-gradient(circle at center,black 30%,transparent 75%);
+  pointer-events:none;
+}
+.login-box{
+  position:relative;width:100%;max-width:420px;
+  background:linear-gradient(160deg,var(--navy-light),var(--navy-mid));
+  border:1px solid var(--border);border-radius:16px;
+  padding:44px 36px;box-shadow:0 30px 80px rgba(0,0,0,.7);
+  animation:loginIn .6s cubic-bezier(.16,1,.3,1);
+}
+.login-box::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--blue-bright),transparent);
+  border-radius:16px 16px 0 0;
+}
+@keyframes loginIn{
+  from{opacity:0;transform:translateY(30px) scale(.96)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+.login-box .logo{
+  display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:28px;
+}
+.login-box .logo img{height:52px;width:auto}
+.login-box .logo-text{display:flex;flex-direction:column;line-height:1.1}
+.login-box .logo-text .brand{font-family:var(--font-display);font-size:17px;font-weight:700;letter-spacing:.02em}
+.login-box .logo-text .tag{font-size:10px;color:var(--blue-bright);letter-spacing:.14em;text-transform:uppercase}
+.login-box h1{font-size:24px;text-align:center;margin-bottom:8px;letter-spacing:-.02em}
+.login-box > p{font-size:14px;color:var(--gray);text-align:center;margin-bottom:32px}
+.login-form-group{margin-bottom:18px}
+.login-form-group label{
+  display:block;font-size:13px;font-weight:500;color:var(--gray-light);margin-bottom:8px;
+}
+.login-form-group input{
+  width:100%;padding:14px 16px;background:var(--black);
+  border:1px solid var(--border);border-radius:10px;color:var(--white);
+  font-size:14px;transition:var(--transition);
+}
+.login-form-group input:focus{
+  outline:none;border-color:var(--blue-bright);
+  box-shadow:0 0 0 4px rgba(45,140,255,.12);
+}
+.login-error{
+  color:var(--red);font-size:13px;text-align:center;margin-top:14px;min-height:18px;
+}
+.login-footer{
+  margin-top:26px;padding-top:22px;border-top:1px solid var(--border);
+  text-align:center;font-size:12px;color:var(--gray);
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:12px 22px;border-radius:10px;font-size:14px;font-weight:600;
+  transition:var(--transition);cursor:pointer;white-space:nowrap;border:1px solid transparent;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--blue),var(--blue-bright));
+  color:var(--white);box-shadow:0 8px 22px rgba(30,111,217,.35);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(45,140,255,.5)}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-ghost{
+  background:transparent;color:var(--gray-light);border:1px solid var(--border);
+}
+.btn-ghost:hover{border-color:var(--blue-bright);color:var(--white);background:rgba(45,140,255,.08)}
+.btn-danger{
+  background:rgba(255,92,92,.1);color:var(--red);border:1px solid rgba(255,92,92,.3);
+}
+.btn-danger:hover{background:rgba(255,92,92,.22);border-color:var(--red)}
+.btn-sm{padding:9px 16px;font-size:13px;border-radius:8px}
+.btn-block{width:100%;padding:15px 22px;font-size:15px}
+.btn svg{width:16px;height:16px;flex-shrink:0}
+
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
+.dashboard{display:none;min-height:100vh;flex-direction:column}
+.dashboard.active{display:flex}
+
+/* Topbar */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(5,8,16,.9);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+  padding:14px 24px;
+}
+.topbar-inner{
+  max-width:1180px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.topbar .logo{display:flex;align-items:center;gap:12px}
+.topbar .logo img{height:38px;width:auto}
+.topbar .logo-text{display:flex;flex-direction:column;line-height:1.1}
+.topbar .logo-text .brand{font-family:var(--font-display);font-size:14px;font-weight:700;letter-spacing:.02em}
+.topbar .logo-text .tag{font-size:9px;color:var(--blue-bright);letter-spacing:.14em;text-transform:uppercase}
+.topbar-actions{display:flex;align-items:center;gap:10px}
+.welcome{font-size:13px;color:var(--gray);display:none}
+.welcome strong{color:var(--white);font-weight:600}
+@media (min-width:700px){.welcome{display:block}}
+
+/* Tabs */
+.tabs{
+  background:var(--navy);border-bottom:1px solid var(--border);
+  padding:0 24px;overflow-x:auto;scrollbar-width:none;
+}
+.tabs::-webkit-scrollbar{display:none}
+.tabs-inner{
+  max-width:1180px;margin:0 auto;display:flex;gap:4px;min-width:max-content;
+}
+.tab{
+  padding:18px 22px;font-size:14px;font-weight:600;color:var(--gray);
+  border-bottom:2px solid transparent;transition:var(--transition);
+  white-space:nowrap;display:flex;align-items:center;gap:9px;
+}
+.tab:hover{color:var(--white)}
+.tab.active{color:var(--white);border-bottom-color:var(--blue-bright)}
+.tab svg{width:16px;height:16px}
+
+/* Content */
+.content{flex:1;padding:36px 24px 100px}
+.content-inner{max-width:1180px;margin:0 auto}
+.tab-panel{display:none;animation:panelIn .4s ease}
+.tab-panel.active{display:block}
+@keyframes panelIn{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Section head */
+.section-head{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:16px;margin-bottom:28px;
+}
+.section-head h2{font-size:24px;margin-bottom:6px;letter-spacing:-.02em}
+.section-head p{font-size:14px;color:var(--gray)}
+.counter{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 16px;background:var(--navy-light);
+  border:1px solid var(--border);border-radius:100px;
+  font-size:13px;font-weight:600;color:var(--gray-light);
+  transition:var(--transition);
+}
+.counter .num{color:var(--blue-bright);font-weight:700}
+.counter.full{border-color:rgba(255,92,92,.4);background:rgba(255,92,92,.06)}
+.counter.full .num{color:var(--red)}
+
+/* ============================================================
+   UPLOAD AREA
+   ============================================================ */
+.upload-area{
+  display:block;border:2px dashed var(--border);border-radius:14px;
+  padding:40px 28px;text-align:center;
+  background:linear-gradient(180deg,var(--navy),rgba(10,22,40,.6));
+  transition:var(--transition);margin-bottom:28px;cursor:pointer;
+  position:relative;overflow:hidden;
+}
+.upload-area::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at center,rgba(45,140,255,.08),transparent 70%);
+  opacity:0;transition:opacity .35s ease;pointer-events:none;
+}
+.upload-area:hover{border-color:var(--blue-bright);background:linear-gradient(180deg,var(--navy-light),var(--navy))}
+.upload-area:hover::before{opacity:1}
+.upload-area.dragover{
+  border-color:var(--blue-bright);background:var(--navy-light);
+  transform:scale(1.005);
+}
+.upload-area.disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
+.upload-area svg.upload-icon{
+  width:40px;height:40px;color:var(--blue-bright);
+  margin:0 auto 14px;transition:transform .35s ease;
+}
+.upload-area:hover svg.upload-icon{transform:translateY(-3px) scale(1.05)}
+.upload-area h3{font-size:17px;margin-bottom:6px}
+.upload-area p{font-size:13px;color:var(--gray);line-height:1.6}
+.upload-area input[type="file"]{display:none}
+
+/* ============================================================
+   ADMIN GALLERY GRID
+   ============================================================ */
+.admin-gallery-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));
+  gap:16px;
+}
+.admin-photo{
+  position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;
+  background:var(--navy-light);border:1px solid var(--border);
+  transition:var(--transition);animation:photoIn .5s cubic-bezier(.16,1,.3,1) backwards;
+}
+@keyframes photoIn{
+  from{opacity:0;transform:scale(.94)}
+  to{opacity:1;transform:scale(1)}
+}
+.admin-photo:hover{
+  border-color:var(--border-bright);
+  box-shadow:0 12px 30px rgba(0,0,0,.5);
+}
+.admin-photo img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .5s ease;
+}
+.admin-photo:hover img{transform:scale(1.05)}
+.admin-photo .delete-btn{
+  position:absolute;top:10px;right:10px;
+  width:34px;height:34px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,92,92,.92);color:var(--white);
+  border-radius:50%;transition:var(--transition);
+  opacity:0;transform:scale(.85);
+  box-shadow:0 6px 16px rgba(255,92,92,.4);
+}
+.admin-photo:hover .delete-btn{opacity:1;transform:scale(1)}
+.admin-photo .delete-btn:hover{background:var(--red);transform:scale(1.12) rotate(8deg)}
+.admin-photo .delete-btn svg{width:14px;height:14px}
+.admin-photo .caption-edit{
+  position:absolute;bottom:0;left:0;right:0;padding:10px;
+  background:linear-gradient(to top,rgba(5,8,16,.98) 40%,transparent);
+}
+.admin-photo .caption-edit input{
+  width:100%;padding:7px 10px;font-size:12px;
+  background:rgba(5,8,16,.85);border:1px solid var(--border);
+  border-radius:6px;color:var(--white);
+  transition:var(--transition);
+}
+.admin-photo .caption-edit input:focus{
+  outline:none;border-color:var(--blue-bright);background:var(--black);
+}
+.admin-photo .caption-edit input::placeholder{color:var(--gray)}
+
+/* ============================================================
+   PRICING TABLE
+   ============================================================ */
+.pricing-table{width:100%;border-collapse:separate;border-spacing:0 10px;table-layout:fixed}
+.pricing-table th{
+  text-align:left;font-size:12px;font-weight:600;color:var(--gray);
+  text-transform:uppercase;letter-spacing:.08em;padding:0 16px 6px;
+}
+.pricing-table th.col-price{width:200px}
+.pricing-table th.col-actions{width:60px}
+.pricing-table td{
+  background:var(--navy-light);padding:12px 16px;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  vertical-align:middle;transition:var(--transition);
+}
+.pricing-table tr:hover td{background:var(--navy-mid)}
+.pricing-table td:first-child{
+  border-left:1px solid var(--border);border-radius:10px 0 0 10px;
+}
+.pricing-table td:last-child{
+  border-right:1px solid var(--border);border-radius:0 10px 10px 0;
+}
+.pricing-table input{
+  width:100%;padding:10px 12px;background:var(--black);
+  border:1px solid transparent;border-radius:8px;
+  color:var(--white);font-size:14px;transition:var(--transition);
+}
+.pricing-table input:focus{
+  outline:none;border-color:var(--blue-bright);
+  background:var(--navy-mid);box-shadow:0 0 0 3px rgba(45,140,255,.12);
+}
+.pricing-table input::placeholder{color:var(--gray)}
+.pricing-table .actions-cell{text-align:right;padding-right:14px}
+.row-delete{
+  width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;
+  background:rgba(255,92,92,.1);color:var(--red);border-radius:8px;
+  transition:var(--transition);
+}
+.row-delete:hover{background:rgba(255,92,92,.25);transform:scale(1.08)}
+.row-delete svg{width:15px;height:15px}
+
+.pricing-actions{margin-top:26px;display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-end}
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+.empty{
+  text-align:center;padding:70px 24px;
+  border:1px dashed var(--border);border-radius:14px;
+  color:var(--gray);background:linear-gradient(180deg,var(--navy),transparent);
+}
+.empty svg{width:46px;height:46px;margin:0 auto 16px;color:var(--gray);opacity:.6}
+.empty h4{font-size:17px;color:var(--white);margin-bottom:6px;font-weight:600}
+.empty p{font-size:14px;max-width:380px;margin:0 auto}
+.empty code{background:var(--black);padding:2px 6px;border-radius:4px;font-size:12px;color:var(--blue-bright)}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.toast{
+  position:fixed;bottom:28px;right:28px;z-index:200;
+  background:linear-gradient(160deg,var(--navy-light),var(--navy-mid));
+  border:1px solid var(--border);border-left:3px solid var(--blue-bright);
+  border-radius:10px;padding:14px 20px 14px 18px;
+  font-size:14px;font-weight:500;
+  box-shadow:0 20px 50px rgba(0,0,0,.6);
+  transform:translateY(140%);transition:transform .4s cubic-bezier(.16,1,.3,1);
+  max-width:360px;display:flex;align-items:center;gap:12px;
+}
+.toast.show{transform:translateY(0)}
+.toast.success{border-left-color:var(--green)}
+.toast.error{border-left-color:var(--red)}
+.toast svg{width:20px;height:20px;flex-shrink:0}
+.toast.success svg{color:var(--green)}
+.toast.error svg{color:var(--red)}
+.toast.info svg{color:var(--blue-bright)}
+
+/* ============================================================
+   LOADING OVERLAY
+   ============================================================ */
+.loading-overlay{
+  position:fixed;inset:0;background:rgba(5,8,16,.88);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  z-index:150;display:none;align-items:center;justify-content:center;
+  flex-direction:column;gap:20px;
+}
+.loading-overlay.active{display:flex}
+.spinner{
+  width:44px;height:44px;border:3px solid var(--border);
+  border-top-color:var(--blue-bright);border-radius:50%;
+  animation:spin .9s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-overlay p{font-size:14px;color:var(--gray-light);font-weight:500}
+
+/* ============================================================
+   CONFIRM MODAL
+   ============================================================ */
+.modal-backdrop{
+  position:fixed;inset:0;background:rgba(3,5,10,.8);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  z-index:180;display:none;align-items:center;justify-content:center;padding:24px;
+}
+.modal-backdrop.active{display:flex}
+.modal{
+  width:100%;max-width:400px;
+  background:linear-gradient(160deg,var(--navy-light),var(--navy-mid));
+  border:1px solid var(--border);border-radius:14px;
+  padding:30px;box-shadow:0 30px 80px rgba(0,0,0,.7);
+  animation:modalIn .3s cubic-bezier(.16,1,.3,1);
+}
+@keyframes modalIn{
+  from{opacity:0;transform:translateY(20px) scale(.96)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+.modal h3{font-size:19px;margin-bottom:10px}
+.modal p{font-size:14px;color:var(--gray);margin-bottom:24px;line-height:1.65}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:700px){
+  .content{padding:24px 16px 90px}
+  .admin-gallery-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .admin-photo .delete-btn{opacity:1;transform:scale(1);width:30px;height:30px}
+  .topbar{padding:12px 16px}
+  .tabs{padding:0 16px}
+  .tab{padding:15px 14px;font-size:13px}
+  .upload-area{padding:30px 18px}
+  .pricing-table th.col-price{width:130px}
+  .pricing-table td{padding:10px 10px}
+  .pricing-table input{padding:9px 10px;font-size:13px}
+  .login-box{padding:36px 26px}
+  .toast{left:16px;right:16px;bottom:16px;max-width:none}
+  .section-head h2{font-size:20px}
+  .pricing-actions{justify-content:stretch}
+  .pricing-actions .btn{flex:1;justify-content:center}
+}
+@media (max-width:420px){
+  .admin-gallery-grid{grid-template-columns:1fr}
+  .topbar .welcome{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     LOGIN SCREEN
+     ============================================================ -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <div class="logo">
+      <img src="assets/carcomfortlogo.png" alt="Car Comfort" onerror="this.style.display='none'" />
+      <div class="logo-text">
+        <span class="brand">CAR COMFORT</span>
+        <span class="tag">Admin Panel</span>
+      </div>
+    </div>
+    <h1>Welcome Back</h1>
+    <p>Enter the admin password to continue.</p>
+    <form id="loginForm" autocomplete="off">
+      <div class="login-form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="••••••••" autocomplete="current-password" required />
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" id="loginBtn">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+        Login
+      </button>
+      <div class="login-error" id="loginError"></div>
+    </form>
+    <div class="login-footer">Private access · Car Comfort, Karnal</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     DASHBOARD
+     ============================================================ -->
+<div class="dashboard" id="dashboard">
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="logo">
+        <img src="assets/carcomfortlogo.png" alt="Car Comfort" onerror="this.style.display='none'" />
+        <div class="logo-text">
+          <span class="brand">CAR COMFORT</span>
+          <span class="tag">Admin Panel</span>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <span class="welcome">Hi, <strong>Charan</strong> 👋</span>
+        <a href="index.html" target="_blank" class="btn btn-ghost btn-sm">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          View Site
+        </a>
+        <button class="btn btn-ghost btn-sm" id="logoutBtn">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <div class="tabs-inner">
+      <button class="tab active" data-tab="gallery">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        Gallery
+      </button>
+      <button class="tab" data-tab="pricing">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Pricing
+      </button>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <div class="content-inner">
+
+      <!-- ================= GALLERY TAB ================= -->
+      <div class="tab-panel active" id="panel-gallery">
+        <div class="section-head">
+          <div>
+            <h2>Gallery Photos</h2>
+            <p>Upload, caption, or delete photos. They appear on the website instantly.</p>
+          </div>
+          <div class="counter" id="photoCounter">
+            <span class="num" id="photoCount">0</span> / 15 photos
+          </div>
+        </div>
+
+        <label class="upload-area" id="uploadArea">
+          <input type="file" id="fileInput" accept="image/*" multiple />
+          <svg class="upload-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+          <h3>Click to upload photos</h3>
+          <p>JPG or PNG · Max 2MB each · Up to 15 total</p>
+        </label>
+
+        <div class="admin-gallery-grid" id="adminGalleryGrid">
+          <div class="empty" style="grid-column:1/-1"><p>Loading photos…</p></div>
+        </div>
+      </div>
+
+      <!-- ================= PRICING TAB ================= -->
+      <div class="tab-panel" id="panel-pricing">
+        <div class="section-head">
+          <div>
+            <h2>Service Pricing</h2>
+            <p>Edit names and prices. Add or remove rows anytime.</p>
+          </div>
+          <button class="btn btn-primary btn-sm" id="addServiceBtn">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+            Add Service
+          </button>
+        </div>
+
+        <table class="pricing-table">
+          <thead>
+            <tr>
+              <th>Service Name</th>
+              <th class="col-price">Price</th>
+              <th class="col-actions"></th>
+            </tr>
+          </thead>
+          <tbody id="pricingBody">
+            <tr><td colspan="3" style="text-align:center;color:var(--gray);padding:24px;background:transparent;border:none">Loading services…</td></tr>
+          </tbody>
+        </table>
+
+        <div class="pricing-actions">
+          <button class="btn btn-primary" id="savePricingBtn">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            Save Changes
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     LOADING OVERLAY
+     ============================================================ -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <p id="loadingText">Working…</p>
+</div>
+
+<!-- ============================================================
+     CONFIRM MODAL
+     ============================================================ -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal">
+    <h3 id="modalTitle">Confirm</h3>
+    <p id="modalMessage">Are you sure?</p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost btn-sm" id="modalCancel">Cancel</button>
+      <button class="btn btn-danger btn-sm" id="modalConfirm">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     TOAST
+     ============================================================ -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   CAR COMFORT — ADMIN.JS
+   Password is verified server-side via Supabase RPC.
+   No password string appears in this file.
+   ============================================================ */
+
+// ============================================================
+// CONFIG — fill these two after Supabase setup
+// ============================================================
+const SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';
+const SUPABASE_ANON_KEY = 'YOUR-ANON-KEY-HERE';
+
+// Table + bucket names (prefixed so you can stack other clients)
+const TABLES = {
+  gallery: 'carcomfort_gallery',
+  services: 'carcomfort_services'
+};
+const STORAGE_BUCKET = 'carcomfort-photos';
+
+// Limits
+const PHOTO_LIMIT = 15;
+const MAX_FILE_SIZE = 2 * 1024 * 1024;
+const COMPRESS_MAX_WIDTH = 1400;
+const COMPRESS_QUALITY = 0.82;
+// ============================================================
+
+// ---------- SHORTCUTS ----------
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
+
+// ---------- UTILITIES ----------
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+let toastTimer = null;
+function toast(message, type = 'info') {
+  const el = $('#toast');
+  const icons = {
+    success: '<svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>',
+    error: '<svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>',
+    info: '<svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>'
+  };
+  el.innerHTML = `${icons[type] || icons.info}<span>${escapeHtml(message)}</span>`;
+  el.className = `toast show ${type}`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 3400);
+}
+
+function showLoading(text = 'Working…') {
+  $('#loadingText').textContent = text;
+  $('#loadingOverlay').classList.add('active');
+}
+function hideLoading() {
+  $('#loadingOverlay').classList.remove('active');
+}
+
+function showConfirm(title, message, onConfirm) {
+  $('#modalTitle').textContent = title;
+  $('#modalMessage').textContent = message;
+  const backdrop = $('#modalBackdrop');
+  backdrop.classList.add('active');
+
+  const cleanup = () => {
+    backdrop.classList.remove('active');
+    $('#modalConfirm').removeEventListener('click', handleConfirm);
+    $('#modalCancel').removeEventListener('click', handleCancel);
+  };
+  const handleConfirm = () => { cleanup(); onConfirm(); };
+  const handleCancel = () => cleanup();
+
+  $('#modalConfirm').addEventListener('click', handleConfirm);
+  $('#modalCancel').addEventListener('click', handleCancel);
+}
+
+// Image compression via canvas
+function compressImage(file, maxW = COMPRESS_MAX_WIDTH, quality = COMPRESS_QUALITY) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let { width, height } = img;
+        if (width > maxW) {
+          height = (maxW / width) * height;
+          width = maxW;
+        }
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        canvas.toBlob(blob => {
+          if (blob) resolve(blob);
+          else reject(new Error('Compression failed'));
+        }, 'image/jpeg', quality);
+      };
+      img.onerror = () => reject(new Error('Invalid image'));
+      img.src = e.target.result;
+    };
+    reader.onerror = () => reject(new Error('File read failed'));
+    reader.readAsDataURL(file);
+  });
+}
+
+// ============================================================
+// SUPABASE HELPERS (REST API — no SDK)
+// ============================================================
+const apiHeaders = {
+  'apikey': SUPABASE_ANON_KEY,
+  'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+  'Content-Type': 'application/json'
+};
+
+async function dbGet(table, query = '') {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?${query}`, {
+    headers: apiHeaders
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`GET ${table} failed: ${err}`);
+  }
+  return res.json();
+}
+
+async function dbInsert(table, data) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+    method: 'POST',
+    headers: { ...apiHeaders, 'Prefer': 'return=representation' },
+    body: JSON.stringify(data)
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`INSERT ${table} failed: ${err}`);
+  }
+  return res.json();
+}
+
+async function dbUpdate(table, id, data) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?id=eq.${id}`, {
+    method: 'PATCH',
+    headers: { ...apiHeaders, 'Prefer': 'return=representation' },
+    body: JSON.stringify(data)
+  });
+  if (!res.ok) throw new Error(`UPDATE ${table} failed`);
+  return res.json();
+}
+
+async function dbDelete(table, id) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?id=eq.${id}`, {
+    method: 'DELETE',
+    headers: apiHeaders
+  });
+  if (!res.ok) throw new Error(`DELETE ${table} failed`);
+  return true;
+}
+
+async function storageUpload(blob, filename) {
+  const res = await fetch(
+    `${SUPABASE_URL}/storage/v1/object/${STORAGE_BUCKET}/${filename}`,
+    {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': blob.type || 'image/jpeg',
+        'x-upsert': 'true'
+      },
+      body: blob
+    }
+  );
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error('Storage upload failed: ' + err);
+  }
+  return `${SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${filename}`;
+}
+
+async function storageDelete(filename) {
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/storage/v1/object/${STORAGE_BUCKET}/${filename}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      }
+    );
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+function filenameFromUrl(url) {
+  if (!url) return '';
+  const parts = url.split('/');
+  return parts[parts.length - 1];
+}
+
+// ============================================================
+// PASSWORD CHECK VIA SUPABASE RPC
+// No password is stored in this file. The DB compares the hash.
+// ============================================================
+async function verifyPassword(input) {
+  if (SUPABASE_URL.includes('YOUR-PROJECT')) {
+    throw new Error('Supabase not configured. Add URL + anon key at the top of admin.html.');
+  }
+
+  const res = await fetch(
+    `${SUPABASE_URL}/rest/v1/rpc/carcomfort_check_admin_password`,
+    {
+      method: 'POST',
+      headers: {
+        ...apiHeaders,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ input_password: input })
+    }
+  );
+
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error('Auth request failed: ' + err);
+  }
+
+  const result = await res.json();
+  return result === true;
+}
+
+// ============================================================
+// AUTH — session-gated, no local password
+// ============================================================
+const loginScreen = $('#loginScreen');
+const dashboard = $('#dashboard');
+const loginForm = $('#loginForm');
+const loginError = $('#loginError');
+const loginBtn = $('#loginBtn');
+
+function bootIfAuthed() {
+  const authed = sessionStorage.getItem('cc_admin_authed') === '1';
+  if (authed) {
+    loginScreen.classList.add('hidden');
+    dashboard.classList.add('active');
+    initDashboard();
+  }
+}
+
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  loginError.textContent = '';
+  const pw = $('#password').value;
+
+  if (!pw) {
+    loginError.textContent = 'Please enter the password.';
+    return;
+  }
+
+  loginBtn.disabled = true;
+  const originalHtml = loginBtn.innerHTML;
+  loginBtn.innerHTML = 'Checking…';
+
+  try {
+    const ok = await verifyPassword(pw);
+    if (ok) {
+      sessionStorage.setItem('cc_admin_authed', '1');
+      loginScreen.classList.add('hidden');
+      dashboard.classList.add('active');
+      initDashboard();
+    } else {
+      loginError.textContent = 'Wrong password. Try again.';
+      $('#password').value = '';
+      $('#password').focus();
+    }
+  } catch (err) {
+    console.error(err);
+    loginError.textContent = err.message || 'Login failed. Try again.';
+  } finally {
+    loginBtn.disabled = false;
+    loginBtn.innerHTML = originalHtml;
+  }
+});
+
+$('#logoutBtn').addEventListener('click', () => {
+  showConfirm('Log out?', 'You will need to enter the password again.', () => {
+    sessionStorage.removeItem('cc_admin_authed');
+    location.reload();
+  });
+});
+
+// ============================================================
+// TABS
+// ============================================================
+$$('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const name = tab.dataset.tab;
+    $$('.tab').forEach(t => t.classList.toggle('active', t === tab));
+    $$('.tab-panel').forEach(p => p.classList.toggle('active', p.id === `panel-${name}`));
+
+    if (name === 'gallery') loadGallery();
+    if (name === 'pricing') loadPricing();
+  });
+});
+
+// ============================================================
+// GALLERY
+// ============================================================
+let galleryPhotos = [];
+let galleryLoaded = false;
+
+async function loadGallery() {
+  const grid = $('#adminGalleryGrid');
+  if (!galleryLoaded) {
+    grid.innerHTML = `<div class="empty" style="grid-column:1/-1"><p>Loading photos…</p></div>`;
+  }
+
+  if (SUPABASE_URL.includes('YOUR-PROJECT')) {
+    grid.innerHTML = `
+      <div class="empty" style="grid-column:1/-1">
+        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <h4>Supabase not configured</h4>
+        <p>Add your Supabase URL and anon key at the top of <code>admin.html</code> to enable uploads.</p>
+      </div>`;
+    return;
+  }
+
+  try {
+    const data = await dbGet(TABLES.gallery, 'select=*&order=sort_order.asc,created_at.desc');
+    galleryPhotos = data;
+    galleryLoaded = true;
+    renderGallery();
+    updateCounter();
+  } catch (err) {
+    console.error(err);
+    grid.innerHTML = `
+      <div class="empty" style="grid-column:1/-1">
+        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <h4>Could not load gallery</h4>
+        <p>Check your Supabase config or RLS policies.</p>
+      </div>`;
+  }
+}
+
+function updateCounter() {
+  const count = galleryPhotos.length;
+  $('#photoCount').textContent = count;
+  const counter = $('#photoCounter');
+  const uploadArea = $('#uploadArea');
+
+  if (count >= PHOTO_LIMIT) {
+    counter.classList.add('full');
+    uploadArea.classList.add('disabled');
+  } else {
+    counter.classList.remove('full');
+    uploadArea.classList.remove('disabled');
+  }
+}
+
+function renderGallery() {
+  const grid = $('#adminGalleryGrid');
+
+  if (!galleryPhotos.length) {
+    grid.innerHTML = `
+      <div class="empty" style="grid-column:1/-1">
+        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <h4>No photos yet</h4>
+        <p>Upload your first photo using the box above. It will appear on the website instantly.</p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = galleryPhotos.map((p, i) => `
+    <div class="admin-photo" data-id="${p.id}" style="animation-delay:${i * 40}ms">
+      <img src="${p.image_url}" alt="${escapeHtml(p.caption || '')}" loading="lazy" />
+      <button class="delete-btn" data-action="delete" data-id="${p.id}" data-file="${filenameFromUrl(p.image_url)}" aria-label="Delete">
+        <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <div class="caption-edit">
+        <input type="text" placeholder="Add caption…" value="${escapeHtml(p.caption || '')}" data-action="caption" data-id="${p.id}" maxlength="60" />
+      </div>
+    </div>
+  `).join('');
+
+  // Delete buttons
+  grid.querySelectorAll('[data-action="delete"]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const id = btn.dataset.id;
+      const filename = btn.dataset.file;
+      showConfirm('Delete photo?', 'This removes it from the gallery and storage. Cannot be undone.', async () => {
+        try {
+          showLoading('Deleting photo…');
+          await dbDelete(TABLES.gallery, id);
+          if (filename) await storageDelete(filename);
+          galleryPhotos = galleryPhotos.filter(p => p.id !== id);
+          renderGallery();
+          updateCounter();
+          toast('Photo deleted', 'success');
+        } catch (err) {
+          console.error(err);
+          toast('Delete failed: ' + err.message, 'error');
+        } finally {
+          hideLoading();
+        }
+      });
+    });
+  });
+
+  // Caption edits (save on blur)
+  grid.querySelectorAll('[data-action="caption"]').forEach(input => {
+    input.addEventListener('blur', async () => {
+      const id = input.dataset.id;
+      const newCaption = input.value.trim();
+      const photo = galleryPhotos.find(p => p.id === id);
+      if (!photo || photo.caption === newCaption) return;
+      try {
+        await dbUpdate(TABLES.gallery, id, { caption: newCaption });
+        photo.caption = newCaption;
+        toast('Caption saved', 'success');
+      } catch (err) {
+        toast('Caption save failed', 'error');
+      }
+    });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') input.blur();
+    });
+  });
+}
+
+// ============================================================
+// UPLOAD HANDLING
+// ============================================================
+const uploadArea = $('#uploadArea');
+const fileInput = $('#fileInput');
+
+uploadArea.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  if (!uploadArea.classList.contains('disabled')) uploadArea.classList.add('dragover');
+});
+uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
+uploadArea.addEventListener('drop', (e) => {
+  e.preventDefault();
+  uploadArea.classList.remove('dragover');
+  if (uploadArea.classList.contains('disabled')) return;
+  handleFiles(e.dataTransfer.files);
+});
+fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
+
+async function handleFiles(files) {
+  if (!files || !files.length) return;
+
+  if (galleryPhotos.length >= PHOTO_LIMIT) {
+    toast(`Gallery full — max ${PHOTO_LIMIT} photos. Delete one first.`, 'error');
+    return;
+  }
+
+  const remaining = PHOTO_LIMIT - galleryPhotos.length;
+  const list = Array.from(files).slice(0, remaining);
+
+  if (files.length > remaining) {
+    toast(`Only ${remaining} slot(s) left. Uploading first ${remaining}.`, 'info');
+  }
+
+  showLoading(`Uploading 0 / ${list.length}…`);
+  let success = 0, failed = 0;
+
+  for (let i = 0; i < list.length; i++) {
+    const file = list[i];
+    showLoading(`Uploading ${i + 1} / ${list.length}…`);
+
+    try {
+      if (!file.type.startsWith('image/')) throw new Error('Not an image');
+
+      let blob = await compressImage(file);
+
+      // If still over 2MB, compress harder
+      if (blob.size > MAX_FILE_SIZE) {
+        blob = await compressImage(file, 1100, 0.7);
+        if (blob.size > MAX_FILE_SIZE * 1.2) {
+          throw new Error('File too large even after compression');
+        }
+      }
+
+      const filename = `cc-${Date.now()}-${Math.random().toString(36).slice(2, 8)}.jpg`;
+      const publicUrl = await storageUpload(blob, filename);
+
+      const inserted = await dbInsert(TABLES.gallery, {
+        image_url: publicUrl,
+        caption: '',
+        sort_order: galleryPhotos.length + i
+      });
+
+      if (Array.isArray(inserted)) galleryPhotos.unshift(inserted[0]);
+      success++;
+    } catch (err) {
+      console.error('Upload error:', err);
+      failed++;
+    }
+  }
+
+  hideLoading();
+  fileInput.value = '';
+  renderGallery();
+  updateCounter();
+
+  if (success && !failed) toast(`${success} photo${success > 1 ? 's' : ''} uploaded`, 'success');
+  else if (success && failed) toast(`${success} uploaded, ${failed} failed`, 'info');
+  else if (failed) toast(`All uploads failed. Check console.`, 'error');
+}
+
+// ============================================================
+// PRICING
+// ============================================================
+let pricingRows = [];
+let pricingLoaded = false;
+
+async function loadPricing() {
+  const tbody = $('#pricingBody');
+  if (!pricingLoaded) {
+    tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;color:var(--gray);padding:24px;background:transparent;border:none">Loading services…</td></tr>`;
+  }
+
+  if (SUPABASE_URL.includes('YOUR-PROJECT')) {
+    tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;color:var(--yellow);padding:24px;background:transparent;border:none">Supabase not configured — add your keys to enable saving.</td></tr>`;
+    pricingRows = defaultServices();
+    renderPricing();
+    return;
+  }
+
+  try {
+    const data = await dbGet(TABLES.services, 'select=*&order=sort_order.asc,created_at.asc');
+    pricingRows = data.length ? data : defaultServices();
+    pricingLoaded = true;
+    renderPricing();
+  } catch (err) {
+    console.error(err);
+    tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;color:var(--red);padding:24px;background:transparent;border:none">Could not load services. Check Supabase config.</td></tr>`;
+  }
+}
+
+function defaultServices() {
+  return [
+    { id: null, name: 'Door Panel & Dashboard', price: 'Ask for quote' },
+    { id: null, name: 'Roof Cloth', price: 'Ask for quote' },
+    { id: null, name: 'Seat Cover', price: 'Ask for quote' },
+    { id: null, name: 'Gear Cover', price: 'Ask for quote' },
+    { id: null, name: 'Khob Leather', price: 'Ask for quote' },
+    { id: null, name: 'Custom Interior', price: 'Ask for quote' }
+  ];
+}
+
+function renderPricing() {
+  const tbody = $('#pricingBody');
+
+  if (!pricingRows.length) {
+    tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;color:var(--gray);padding:24px;background:transparent;border:none">No services yet. Click "Add Service" to start.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = pricingRows.map((row, i) => `
+    <tr data-index="${i}">
+      <td>
+        <input type="text" value="${escapeHtml(row.name || '')}" data-field="name" placeholder="e.g. Seat Cover" maxlength="60" />
+      </td>
+      <td>
+        <input type="text" value="${escapeHtml(row.price || '')}" data-field="price" placeholder="e.g. ₹2,500 or Ask for quote" maxlength="40" />
+      </td>
+      <td class="actions-cell">
+        <button class="row-delete" data-action="delete-row" data-index="${i}" aria-label="Remove">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M1 7h22M9 7V4a1 1 0 011-1h4a1 1 0 011 1v3"/></svg>
+        </button>
+      </td>
+    </tr>
+  `).join('');
+
+  // Field edits
+  tbody.querySelectorAll('input').forEach(inp => {
+    inp.addEventListener('input', (e) => {
+      const tr = e.target.closest('tr');
+      const idx = parseInt(tr.dataset.index);
+      const field = e.target.dataset.field;
+      pricingRows[idx][field] = e.target.value;
+    });
+  });
+
+  // Delete row
+  tbody.querySelectorAll('[data-action="delete-row"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.dataset.index);
+      const name = pricingRows[idx].name || 'this service';
+      showConfirm('Remove service?', `"${name}" will be removed from the list.`, () => {
+        pricingRows.splice(idx, 1);
+        renderPricing();
+      });
+    });
+  });
+}
+
+$('#addServiceBtn').addEventListener('click', () => {
+  pricingRows.push({ id: null, name: '', price: '' });
+  renderPricing();
+  setTimeout(() => {
+    const inputs = $$('#pricingBody input[data-field="name"]');
+    if (inputs.length) {
+      inputs[inputs.length - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      inputs[inputs.length - 1].focus();
+    }
+  }, 60);
+});
+
+$('#savePricingBtn').addEventListener('click', async () => {
+  if (SUPABASE_URL.includes('YOUR-PROJECT')) {
+    toast('Supabase not configured. Cannot save.', 'error');
+    return;
+  }
+
+  const clean = pricingRows
+    .map((r, i) => ({
+      name: (r.name || '').trim(),
+      price: (r.price || '').trim(),
+      sort_order: i
+    }))
+    .filter(r => r.name);
+
+  if (!clean.length) {
+    toast('Add at least one service before saving.', 'error');
+    return;
+  }
+
+  showLoading('Saving services…');
+  try {
+    const existing = await dbGet(TABLES.services, 'select=id');
+    for (const row of existing) {
+      await dbDelete(TABLES.services, row.id);
+    }
+
+    for (const row of clean) {
+      await dbInsert(TABLES.services, row);
+    }
+
+    toast('Services saved', 'success');
+    pricingLoaded = false;
+    await loadPricing();
+  } catch (err) {
+    console.error(err);
+    toast('Save failed: ' + err.message, 'error');
+  } finally {
+    hideLoading();
+  }
+});
+
+// ============================================================
+// INIT
+// ============================================================
+function initDashboard() {
+  loadGallery();
+}
+
+// Boot
+bootIfAuthed();
+</script>
+</body>
+</html>
