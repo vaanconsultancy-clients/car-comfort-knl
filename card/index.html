@@ -1,0 +1,1329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#050a1a" />
+<title>Car Comfort — The Factory Outlet | Karnal</title>
+<meta name="description" content="Car Comfort — A Unique Car Interior Studio. Seat covers, roof cloth, dashboard, gear cover & khob leather. Karnal." />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Car Comfort — The Factory Outlet" />
+<meta property="og:description" content="A Unique Car Interior Studio · Karnal" />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   CAR COMFORT — VAAN DIGITAL VISITING CARD
+   Palette: Deep navy + electric blue + silver + cream
+   Type A: Full cinematic opening
+   ============================================================ */
+
+:root{
+  --navy-900:#050a1a;
+  --navy-800:#0a1330;
+  --navy-700:#0f1c45;
+  --navy-600:#152a63;
+  --blue:#1a6fd4;
+  --blue-bright:#3b9bff;
+  --blue-glow:#5fb4ff;
+  --silver:#c9d6e8;
+  --silver-bright:#eaf2ff;
+  --cream:#f4f6fb;
+  --gold:#d4a017;
+  --gold-bright:#f0c14b;
+  --red-soft:#e07a7a;
+  --green:#25D366;
+  --green-dark:#128C4A;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+
+html,body{
+  background:var(--navy-900);
+  color:var(--cream);
+  font-family:'Inter',sans-serif;
+  min-height:100%;
+  overflow-x:hidden;
+}
+
+body.locked{overflow:hidden;height:100vh;}
+
+/* ============================================================
+   STAGE — CINEMATIC OPENING
+   ============================================================ */
+#stage{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:#000;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+#stage.hidden{
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .6s ease;
+}
+
+/* Layer 1 — blurred backdrop */
+.layer-back{
+  position:absolute;
+  inset:-40px;
+  background-image:url('carc Comfort.png');
+  background-image:url('carcomfort.png');
+  background-size:contain;
+  background-position:center;
+  background-repeat:no-repeat;
+  filter:blur(22px) brightness(.45) saturate(1.1);
+  transform:scale(1.15);
+  will-change:transform;
+}
+@media(min-width:640px){
+  .layer-back{
+    background-size:cover;
+    filter:blur(30px) brightness(.4) saturate(1.2);
+  }
+}
+
+/* Layer 2 — crisp image */
+.layer-front{
+  position:absolute;
+  inset:0;
+  background-image:url('carcomfort.png');
+  background-size:contain;
+  background-position:center;
+  background-repeat:no-repeat;
+  opacity:0;
+  transform:scale(1.02);
+  will-change:transform,opacity;
+  filter:drop-shadow(0 0 60px rgba(26,111,212,.35));
+}
+@media(min-width:640px){
+  .layer-front{
+    background-size:cover;
+  }
+}
+
+/* Layer 3 — warm/navy gradient overlay for depth */
+.layer-tint{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(26,111,212,.15) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(5,10,26,.35) 0%, rgba(5,10,26,.85) 75%, #050a1a 100%);
+  pointer-events:none;
+}
+
+/* Light rays canvas */
+#rays, #particles{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+#rays{opacity:.55;mix-blend-mode:screen;}
+#particles{z-index:5;}
+
+/* Letterbox bars */
+.letterbox{
+  position:absolute;
+  left:0;right:0;
+  height:0;
+  background:#000;
+  z-index:10;
+  transition:height 1s cubic-bezier(.7,0,.3,1);
+}
+.letterbox.top{top:0;}
+.letterbox.bottom{bottom:0;}
+.letterbox.open{height:8vh;}
+
+/* HUD corners */
+.hud{
+  position:absolute;
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  letter-spacing:.18em;
+  color:var(--blue-glow);
+  text-transform:uppercase;
+  opacity:0;
+  z-index:12;
+  text-shadow:0 0 8px rgba(59,155,255,.6);
+  pointer-events:none;
+}
+.hud.tl{top:14px;left:16px;}
+.hud.tr{top:14px;right:16px;text-align:right;}
+.hud.bl{bottom:14px;left:16px;}
+.hud.br{bottom:14px;right:16px;text-align:right;}
+.hud .dot{
+  display:inline-block;
+  width:5px;height:5px;
+  background:var(--blue-bright);
+  border-radius:50%;
+  margin-right:6px;
+  box-shadow:0 0 8px var(--blue-bright);
+  animation:blink 1.4s infinite;
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+/* Scanline */
+.scanline{
+  position:absolute;
+  left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg,transparent,rgba(95,180,255,.7),transparent);
+  z-index:11;
+  opacity:0;
+  box-shadow:0 0 20px rgba(59,155,255,.8);
+}
+
+/* Shockwave ring */
+.shockwave{
+  position:absolute;
+  top:50%;left:50%;
+  width:20px;height:20px;
+  margin:-10px 0 0 -10px;
+  border:2px solid rgba(95,180,255,.9);
+  border-radius:50%;
+  opacity:0;
+  z-index:8;
+  pointer-events:none;
+  box-shadow:0 0 40px rgba(59,155,255,.7), inset 0 0 20px rgba(95,180,255,.5);
+}
+
+/* Opening logo */
+#openLogo{
+  position:absolute;
+  top:50%;left:50%;
+  width:180px;height:180px;
+  margin:-90px 0 0 -90px;
+  z-index:9;
+  opacity:0;
+  transform:scale(.4) rotateY(180deg);
+  filter:drop-shadow(0 0 40px rgba(59,155,255,.7));
+  object-fit:contain;
+  pointer-events:none;
+}
+@media(min-width:640px){
+  #openLogo{width:220px;height:220px;margin:-110px 0 0 -110px;}
+}
+
+/* Cinematic title flash */
+#cineTitle{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  font-family:'Playfair Display',serif;
+  font-weight:800;
+  font-size:clamp(28px,8vw,56px);
+  letter-spacing:.04em;
+  color:#fff;
+  text-align:center;
+  opacity:0;
+  z-index:11;
+  text-shadow:0 0 30px rgba(59,155,255,.9), 0 0 60px rgba(26,111,212,.6);
+  white-space:nowrap;
+  pointer-events:none;
+  padding:0 20px;
+}
+
+/* Gold/blue flash */
+.flash{
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 50% 50%, rgba(95,180,255,.95), rgba(26,111,212,.6) 40%, transparent 70%);
+  opacity:0;
+  z-index:13;
+  pointer-events:none;
+}
+
+/* Skip button */
+#skipBtn{
+  position:absolute;
+  bottom:26px;right:22px;
+  z-index:20;
+  background:rgba(10,19,48,.7);
+  border:1px solid rgba(95,180,255,.5);
+  color:var(--silver-bright);
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  letter-spacing:.16em;
+  padding:9px 16px;
+  border-radius:20px;
+  cursor:pointer;
+  opacity:0;
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  transition:opacity .4s ease, background .2s ease;
+  text-transform:uppercase;
+}
+#skipBtn.show{opacity:1;}
+#skipBtn:active{background:rgba(26,111,212,.4);}
+
+/* ============================================================
+   CARD WRAPPER — CLEAN PATTERN
+   ============================================================ */
+#cardWrap{
+  position:relative;
+  z-index:50;
+  width:100%;
+  padding:10px 12px 40px;
+  text-align:center;
+  font-size:0;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .6s ease;
+}
+#cardWrap.revealed{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.card{
+  display:inline-block;
+  text-align:left;
+  vertical-align:top;
+  width:100%;
+  max-width:420px;
+  font-size:14px;
+  background:
+    linear-gradient(180deg, rgba(15,28,69,.92) 0%, rgba(10,19,48,.96) 100%);
+  border:1px solid rgba(95,180,255,.22);
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:
+    0 30px 80px -20px rgba(0,0,0,.9),
+    0 0 0 1px rgba(95,180,255,.06),
+    inset 0 1px 0 rgba(255,255,255,.05);
+  position:relative;
+}
+
+/* Top blue glow line */
+.card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg,transparent,var(--blue-bright),transparent);
+  opacity:.7;
+}
+
+/* ============================================================
+   CARD HEADER
+   ============================================================ */
+.card-head{
+  padding:32px 22px 24px;
+  text-align:center;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(26,111,212,.22) 0%, transparent 65%);
+  position:relative;
+}
+
+.logo-wrap{
+  position:relative;
+  width:112px;height:112px;
+  margin:0 auto 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Rotating blue ring */
+.ring{
+  position:absolute;
+  inset:-6px;
+  border-radius:50%;
+  border:1.5px solid transparent;
+  border-top-color:var(--blue-bright);
+  border-right-color:rgba(95,180,255,.4);
+  animation:spin 8s linear infinite;
+  box-shadow:0 0 18px rgba(59,155,255,.4);
+}
+.ring2{
+  position:absolute;
+  inset:-14px;
+  border-radius:50%;
+  border:1px solid transparent;
+  border-bottom-color:rgba(95,180,255,.35);
+  border-left-color:rgba(95,180,255,.15);
+  animation:spin 14s linear infinite reverse;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* Pulsing halo */
+.halo{
+  position:absolute;
+  inset:-8px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(59,155,255,.35) 0%, transparent 70%);
+  animation:pulse 3s ease-in-out infinite;
+  z-index:-1;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1);opacity:.55;}
+  50%{transform:scale(1.18);opacity:.85;}
+}
+
+/* Logo disc — light behind dark logo */
+.logo-disc{
+  width:100%;height:100%;
+  border-radius:50%;
+  background:linear-gradient(180deg,#ffffff 0%, #e8eefb 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  box-shadow:
+    0 0 0 3px rgba(10,19,48,.9),
+    0 0 0 5px rgba(95,180,255,.35),
+    0 10px 30px -8px rgba(26,111,212,.6);
+  position:relative;
+  z-index:2;
+}
+.logo-disc img{
+  width:82%;
+  height:82%;
+  object-fit:contain;
+}
+
+.biz-name{
+  font-family:'Playfair Display',serif;
+  font-weight:800;
+  font-size:30px;
+  line-height:1.1;
+  letter-spacing:.01em;
+  margin-bottom:6px;
+  background:linear-gradient(180deg,#ffffff 0%, #9fc7ff 60%, #3b9bff 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.biz-name .accent{
+  background:linear-gradient(180deg,#eaf2ff 0%, #5fb4ff 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.biz-badge{
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:9.5px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--blue-glow);
+  border:1px solid rgba(95,180,255,.35);
+  border-radius:20px;
+  padding:5px 13px;
+  margin:8px 0 4px;
+  background:rgba(26,111,212,.1);
+}
+
+.biz-sub{
+  font-size:12.5px;
+  color:var(--silver);
+  letter-spacing:.06em;
+  margin-top:8px;
+  font-weight:400;
+}
+.biz-sub .loc{
+  color:var(--blue-glow);
+  font-weight:500;
+}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.section{
+  padding:18px 20px;
+  border-top:1px solid rgba(95,180,255,.1);
+  animation:fadeUp .6s ease both;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(12px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+.sec-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--blue-glow);
+  margin-bottom:11px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.sec-label::after{
+  content:'';
+  flex:1;
+  height:1px;
+  background:linear-gradient(90deg, rgba(95,180,255,.35), transparent);
+}
+
+/* Hours block */
+.hours{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.hour-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:13px;
+  color:var(--silver-bright);
+  padding:7px 12px;
+  background:rgba(26,111,212,.07);
+  border-radius:9px;
+  border:1px solid rgba(95,180,255,.1);
+}
+.hour-row .day{font-weight:500;letter-spacing:.03em;}
+.hour-row .time{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11.5px;
+  color:var(--blue-glow);
+  letter-spacing:.02em;
+}
+.hour-row .closed{color:var(--red-soft);}
+.hour-row .open{color:#6ee08a;}
+
+/* Contact block */
+.contact-card{
+  background:rgba(26,111,212,.08);
+  border:1px solid rgba(95,180,255,.16);
+  border-radius:14px;
+  padding:14px 15px;
+  margin-bottom:12px;
+}
+.contact-card:last-child{margin-bottom:0;}
+
+.c-name{
+  font-family:'Playfair Display',serif;
+  font-size:20px;
+  font-weight:700;
+  background:linear-gradient(180deg,#eaf2ff 0%, #5fb4ff 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:2px;
+}
+.c-role{
+  font-size:11px;
+  color:var(--silver);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-bottom:11px;
+  font-family:'JetBrains Mono',monospace;
+}
+
+.btn-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+
+.btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  padding:11px 8px;
+  border-radius:11px;
+  font-size:12.5px;
+  font-weight:600;
+  letter-spacing:.02em;
+  text-decoration:none;
+  border:none;
+  cursor:pointer;
+  transition:transform .15s ease, box-shadow .2s ease;
+  font-family:'Inter',sans-serif;
+}
+.btn:active{transform:scale(.97);}
+.btn svg{width:15px;height:15px;flex-shrink:0;}
+
+.btn-call{
+  background:linear-gradient(180deg,#3b9bff 0%, #1a6fd4 100%);
+  color:#fff;
+  box-shadow:0 6px 18px -6px rgba(26,111,212,.8), inset 0 1px 0 rgba(255,255,255,.25);
+}
+.btn-wa{
+  background:linear-gradient(180deg,#2ee06f 0%, #128C4A 100%);
+  color:#fff;
+  box-shadow:0 6px 18px -6px rgba(18,140,74,.8), inset 0 1px 0 rgba(255,255,255,.25);
+}
+
+.btn-full{
+  width:100%;
+  background:linear-gradient(180deg, rgba(26,111,212,.22) 0%, rgba(26,111,212,.1) 100%);
+  border:1px solid rgba(95,180,255,.3);
+  color:var(--silver-bright);
+}
+.btn-full:active{background:rgba(26,111,212,.35);}
+
+.btn-instagram{
+  background:linear-gradient(135deg,#feda75 0%, #fa7e1e 25%, #d62976 55%, #962fbf 80%, #4f5bd5 100%);
+  color:#fff;
+  box-shadow:0 6px 18px -6px rgba(214,41,118,.6), inset 0 1px 0 rgba(255,255,255,.25);
+  width:100%;
+}
+
+/* Services grid */
+.svc-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+.svc-item{
+  padding:12px 10px;
+  background:rgba(26,111,212,.08);
+  border:1px solid rgba(95,180,255,.14);
+  border-radius:11px;
+  font-size:12px;
+  color:var(--silver-bright);
+  line-height:1.35;
+  text-align:center;
+  font-weight:500;
+  letter-spacing:.01em;
+  transition:background .2s ease, border-color .2s ease;
+}
+.svc-item:active{
+  background:rgba(26,111,212,.2);
+  border-color:rgba(95,180,255,.35);
+}
+
+/* Address */
+.addr-text{
+  font-size:13px;
+  line-height:1.6;
+  color:var(--silver-bright);
+  margin-bottom:12px;
+  letter-spacing:.01em;
+}
+.addr-text .pin{color:var(--blue-glow);font-weight:500;}
+
+/* Share row */
+.share-row{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:8px;
+}
+.share-btn{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  padding:12px 6px;
+  background:rgba(26,111,212,.08);
+  border:1px solid rgba(95,180,255,.16);
+  border-radius:11px;
+  color:var(--silver-bright);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.04em;
+  cursor:pointer;
+  transition:background .2s ease, transform .15s ease;
+  font-family:'Inter',sans-serif;
+  text-transform:uppercase;
+}
+.share-btn:active{transform:scale(.96);background:rgba(26,111,212,.25);}
+.share-btn svg{width:18px;height:18px;color:var(--blue-glow);}
+.share-btn.copied{color:#6ee08a;}
+.share-btn.copied svg{color:#6ee08a;}
+
+/* Footer */
+.footer{
+  padding:18px 20px 22px;
+  text-align:center;
+  border-top:1px solid rgba(95,180,255,.1);
+  background:rgba(5,10,26,.5);
+}
+.footer .tagline{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:13px;
+  color:var(--silver);
+  margin-bottom:10px;
+  letter-spacing:.02em;
+}
+.footer .vaan{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9.5px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--silver);
+  text-decoration:none;
+  opacity:.75;
+  transition:opacity .2s ease, color .2s ease;
+}
+.footer .vaan:hover{opacity:1;color:var(--blue-glow);}
+.footer .vaan strong{
+  color:var(--blue-glow);
+  font-weight:600;
+}
+
+/* Small screens */
+@media(max-width:360px){
+  .biz-name{font-size:26px;}
+  .btn-row{grid-template-columns:1fr;}
+  .share-btn{font-size:9px;}
+}
+</style>
+</head>
+<body class="locked">
+
+<!-- ══════════════════════════════════════════════════════════
+     STAGE — CINEMATIC OPENING
+     ══════════════════════════════════════════════════════════ -->
+<div id="stage">
+  <div class="layer-back"></div>
+  <div class="layer-front" id="layerFront"></div>
+  <div class="layer-tint"></div>
+
+  <canvas id="rays"></canvas>
+  <canvas id="particles"></canvas>
+
+  <div class="letterbox top" id="lbTop"></div>
+  <div class="letterbox bottom" id="lbBot"></div>
+
+  <div class="hud tl" id="hudTL"><span class="dot"></span>CAR COMFORT · STUDIO</div>
+  <div class="hud tr" id="hudTR">KARNAL · 29.6784°N</div>
+  <div class="hud bl" id="hudBL">INTERIOR · ONLINE</div>
+  <div class="hud br" id="hudBR">FACTORY OUTLET</div>
+
+  <div class="scanline" id="scanline"></div>
+  <div class="shockwave" id="shockwave"></div>
+
+  <img id="openLogo" src="carcomfortlogo.png" alt="" />
+
+  <div id="cineTitle">CAR COMFORT</div>
+
+  <div class="flash" id="flash"></div>
+
+  <button id="skipBtn" type="button">Skip ›</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     CARD
+     ══════════════════════════════════════════════════════════ -->
+<div id="cardWrap">
+  <div class="card">
+
+    <!-- HEADER -->
+    <div class="card-head">
+      <div class="logo-wrap">
+        <div class="halo"></div>
+        <div class="ring"></div>
+        <div class="ring2"></div>
+        <div class="logo-disc">
+          <img src="carcomfortlogo.png" alt="Car Comfort logo" />
+        </div>
+      </div>
+      <div class="biz-name">Car <span class="accent">Comfort</span></div>
+      <div class="biz-badge">The Factory Outlet</div>
+      <div class="biz-sub">A Unique Car Interior Studio · <span class="loc">Karnal</span></div>
+    </div>
+
+    <!-- HOURS -->
+    <div class="section">
+      <div class="sec-label">Working Hours</div>
+      <div class="hours">
+        <div class="hour-row">
+          <span class="day">Mon – Sat</span>
+          <span class="time open">9:30 AM – 8:00 PM</span>
+        </div>
+        <div class="hour-row">
+          <span class="day">Sunday</span>
+          <span class="time open">10:30 AM – 4:00 PM</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="section">
+      <div class="sec-label">Get in Touch</div>
+      <div class="contact-card">
+        <div class="c-name">Charan Jit Anand</div>
+        <div class="c-role">Owner</div>
+        <div class="btn-row">
+          <a class="btn btn-call" href="tel:+919896272747">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Call
+          </a>
+          <a class="btn btn-wa" href="https://wa.me/919896272747?text=Hi%20Charan%20Ji%2C%20I%20saw%20your%20Car%20Comfort%20card.%20I%27d%20like%20to%20enquire%20about%20car%20interior%20work." target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSTAGRAM -->
+    <div class="section">
+      <div class="sec-label">Follow Us</div>
+      <a class="btn btn-instagram" href="https://instagram.com/carcomfort.knl" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        @carcomfort.knl
+      </a>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="section">
+      <div class="sec-label">Services</div>
+      <div class="svc-grid">
+        <div class="svc-item">Door Panel &amp; Dashboard</div>
+        <div class="svc-item">Roof Cloth</div>
+        <div class="svc-item">Seat Cover</div>
+        <div class="svc-item">Gear Cover</div>
+        <div class="svc-item">Khob Leather</div>
+        <div class="svc-item">Custom Interior</div>
+      </div>
+    </div>
+
+    <!-- ADDRESS -->
+    <div class="section">
+      <div class="sec-label">Visit Studio</div>
+      <div class="addr-text">
+        <span class="pin">📍</span> 30, Mugal Canal Rd, Sector 13 Extension,<br>
+        Sector 13, Karnal, Haryana 132001
+      </div>
+      <a class="btn btn-full" href="https://maps.app.goo.gl/Ghg2eUx4K1GWJE6G6" target="_blank" rel="noopener" style="text-decoration:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Open in Maps
+      </a>
+    </div>
+
+    <!-- SHARE -->
+    <div class="section">
+      <div class="sec-label">Share Card</div>
+      <div class="share-row">
+        <button class="share-btn" id="btnShare" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          Share
+        </button>
+        <button class="share-btn" id="btnVcf" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Save
+        </button>
+        <button class="share-btn" id="btnCopy" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy
+        </button>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="tagline">"A Unique Car Interior Studio"</div>
+      <a class="vaan" href="https://vaanconsultancy.in" target="_blank" rel="noopener">
+        Powered by <strong>VAAN</strong>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<script>
+/* ============================================================
+   CAR COMFORT — CINEMATIC OPENING + CARD LOGIC
+   ============================================================ */
+
+(function(){
+  'use strict';
+
+  const stage = document.getElementById('stage');
+  const layerFront = document.getElementById('layerFront');
+  const openLogo = document.getElementById('openLogo');
+  const cineTitle = document.getElementById('cineTitle');
+  const flash = document.getElementById('flash');
+  const shockwave = document.getElementById('shockwave');
+  const scanline = document.getElementById('scanline');
+  const skipBtn = document.getElementById('skipBtn');
+  const cardWrap = document.getElementById('cardWrap');
+  const lbTop = document.getElementById('lbTop');
+  const lbBot = document.getElementById('lbBot');
+  const body = document.body;
+
+  let skipped = false;
+  let stageRemoved = false;
+
+  /* ---------- SKIP LOGIC ---------- */
+  function doSkip(){
+    if(skipped) return;
+    skipped = true;
+    // kill all animations
+    if(window.gsap) gsap.globalTimeline.clear();
+    // hide stage
+    stage.style.transition = 'opacity .4s ease';
+    stage.style.opacity = '0';
+    setTimeout(() => {
+      if(!stageRemoved){
+        stage.remove();
+        stageRemoved = true;
+      }
+    }, 420);
+    body.classList.remove('locked');
+    cardWrap.classList.add('revealed');
+  }
+
+  window.addEventListener('keydown', e => {
+    if(e.key === 'Escape' && !skipped && skipBtn.classList.contains('show')) doSkip();
+  });
+  stage.addEventListener('click', e => {
+    if(e.target === skipBtn) return;
+    if(!skipped && skipBtn.classList.contains('show')) doSkip();
+  });
+  skipBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    doSkip();
+  });
+
+  /* ---------- PARTICLE CANVAS ---------- */
+  const pCanvas = document.getElementById('particles');
+  const pCtx = pCanvas.getContext('2d');
+  const rCanvas = document.getElementById('rays');
+  const rCtx = rCanvas.getContext('2d');
+
+  let W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+  function resize(){
+    W = window.innerWidth;
+    H = window.innerHeight;
+    pCanvas.width = W * DPR;
+    pCanvas.height = H * DPR;
+    pCanvas.style.width = W + 'px';
+    pCanvas.style.height = H + 'px';
+    pCtx.setTransform(DPR,0,0,DPR,0,0);
+
+    rCanvas.width = W * DPR;
+    rCanvas.height = H * DPR;
+    rCanvas.style.width = W + 'px';
+    rCanvas.style.height = H + 'px';
+    rCtx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  /* ---- Assembled shape: shield + seat (matches logo) ---- */
+  // normalized coords (-1..1). Shield outline + seat silhouette inside.
+  const shieldPts = [];
+  const N = 180;
+  for(let i=0;i<N;i++){
+    const t = (i/N) * Math.PI * 2;
+    // shield: rounded top, pointed bottom
+    // use parametric: top half circle, bottom half V-taper
+    const a = t - Math.PI/2; // start at top
+    let x, y;
+    if(Math.cos(a) >= 0){
+      // right side
+      x = 0.55 * Math.cos(a) * (1 + 0.15*Math.sin(a));
+      y = 0.75 * Math.sin(a);
+      if(y > 0.15) y = 0.15 + (y - 0.15) * (1 - 0.5*(y-0.15));
+    } else {
+      x = 0.55 * Math.cos(a) * (1 + 0.15*Math.sin(a));
+      y = 0.75 * Math.sin(a);
+      if(y > 0.15) y = 0.15 + (y - 0.15) * (1 - 0.5*(y-0.15));
+    }
+    shieldPts.push({x, y});
+  }
+
+  // seat silhouette points (headrest + back + seat base)
+  const seatPts = [];
+  // headrest (rounded rect)
+  for(let i=0;i<20;i++){
+    const t = (i/20)*Math.PI*2;
+    seatPts.push({x: 0.16*Math.cos(t), y: -0.42 + 0.11*Math.sin(t)});
+  }
+  // back top arc
+  for(let i=0;i<30;i++){
+    const t = Math.PI + (i/30)*Math.PI;
+    seatPts.push({x: 0.32*Math.cos(t), y: -0.28 + 0.22*Math.sin(t)});
+  }
+  // right side down
+  for(let i=0;i<12;i++){
+    seatPts.push({x: 0.32 - i*0.008, y: -0.06 + i*0.035});
+  }
+  // seat base right
+  for(let i=0;i<14;i++){
+    const t = (i/14)*(Math.PI/2);
+    seatPts.push({x: 0.24 + 0.18*Math.sin(t), y: 0.35 + 0.06*Math.cos(t)});
+  }
+  // seat base bottom
+  for(let i=0;i<16;i++){
+    seatPts.push({x: 0.42 - i*0.055, y: 0.41});
+  }
+  // seat base left
+  for(let i=0;i<14;i++){
+    const t = (i/14)*(Math.PI/2);
+    seatPts.push({x: -0.42 + 0.18*(1-Math.cos(t)), y: 0.35 + 0.06*Math.sin(t)});
+  }
+  // left side up
+  for(let i=0;i<12;i++){
+    seatPts.push({x: -0.32 + i*0.008, y: 0.35 - i*0.035});
+  }
+  // back left arc
+  for(let i=0;i<30;i++){
+    const t = (i/30)*Math.PI;
+    seatPts.push({x: -0.32*Math.cos(t), y: -0.28 + 0.22*Math.sin(t)});
+  }
+
+  const TARGETS = shieldPts.concat(seatPts);
+  const TOTAL = TARGETS.length;
+
+  // particles
+  const particles = [];
+  const colors = ['#3b9bff','#5fb4ff','#1a6fd4','#eaf2ff','#c9d6e8','#7cc0ff'];
+  const PCOUNT = Math.min(TOTAL, window.innerWidth < 640 ? 160 : 260);
+
+  for(let i=0;i<PCOUNT;i++){
+    const tgt = TARGETS[i % TARGETS.length];
+    const angle = Math.random() * Math.PI * 2;
+    const dist = 1.2 + Math.random() * 1.3;
+    particles.push({
+      x: Math.cos(angle) * dist,
+      y: Math.sin(angle) * dist,
+      sx: Math.cos(angle) * dist,
+      sy: Math.sin(angle) * dist,
+      tx: tgt.x,
+      ty: tgt.y,
+      size: 1 + Math.random() * 2.2,
+      color: colors[(Math.random()*colors.length)|0],
+      progress: 0,
+      speed: 0.012 + Math.random() * 0.018,
+      delay: Math.random() * 0.35,
+      twinkle: Math.random() * Math.PI * 2
+    });
+  }
+
+  let assemblyProgress = 0;
+  let assemblyActive = false;
+  let particleAlpha = 1;
+  let time = 0;
+
+  function drawParticles(){
+    if(!stage.parentNode) return;
+    pCtx.clearRect(0,0,W,H);
+    const cx = W/2;
+    const cy = H/2;
+    const scale = Math.min(W, H) * 0.30;
+    time += 0.016;
+
+    if(assemblyActive){
+      assemblyProgress += 0.012;
+      if(assemblyProgress > 1) assemblyProgress = 1;
+    }
+
+    particles.forEach(p => {
+      if(assemblyActive){
+        const local = Math.max(0, Math.min(1, (assemblyProgress - p.delay) / 0.65));
+        const e = 1 - Math.pow(1 - local, 3);
+        p.x = p.sx + (p.tx - p.sx) * e;
+        p.y = p.sy + (p.ty - p.sy) * e;
+      } else {
+        // idle drift
+        p.x += Math.sin(time + p.twinkle) * 0.0008;
+        p.y += Math.cos(time + p.twinkle) * 0.0008;
+      }
+
+      const px = cx + p.x * scale;
+      const py = cy + p.y * scale;
+      const tw = 0.6 + 0.4 * Math.sin(time*3 + p.twinkle);
+      const alpha = particleAlpha * tw;
+
+      // glow
+      const g = pCtx.createRadialGradient(px, py, 0, px, py, p.size * 4);
+      g.addColorStop(0, p.color);
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      pCtx.globalAlpha = alpha * 0.4;
+      pCtx.fillStyle = g;
+      pCtx.beginPath();
+      pCtx.arc(px, py, p.size * 4, 0, Math.PI*2);
+      pCtx.fill();
+
+      // core
+      pCtx.globalAlpha = alpha;
+      pCtx.fillStyle = p.color;
+      pCtx.beginPath();
+      pCtx.arc(px, py, p.size, 0, Math.PI*2);
+      pCtx.fill();
+    });
+    pCtx.globalAlpha = 1;
+
+    requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
+
+  /* ---- Light rays ---- */
+  const rays = [];
+  for(let i=0;i<5;i++){
+    rays.push({
+      x: W * (0.6 + Math.random()*0.4),
+      y: -50,
+      len: H * (0.8 + Math.random()*0.5),
+      w: 40 + Math.random()*80,
+      angle: Math.PI/4 + (Math.random()-0.5)*0.4,
+      alpha: 0.04 + Math.random()*0.06,
+      speed: 0.0008 + Math.random()*0.0015,
+      phase: Math.random()*Math.PI*2
+    });
+  }
+
+  function drawRays(){
+    if(!stage.parentNode) return;
+    rCtx.clearRect(0,0,W,H);
+    const t = performance.now() * 0.001;
+    rays.forEach(r => {
+      rCtx.save();
+      rCtx.translate(r.x, r.y);
+      rCtx.rotate(r.angle);
+      const a = r.alpha * (0.6 + 0.4*Math.sin(t*r.speed*1000 + r.phase));
+      const grad = rCtx.createLinearGradient(0,0,0,r.len);
+      grad.addColorStop(0, `rgba(95,180,255,${a})`);
+      grad.addColorStop(0.5, `rgba(59,155,255,${a*0.5})`);
+      grad.addColorStop(1, 'rgba(95,180,255,0)');
+      rCtx.fillStyle = grad;
+      rCtx.beginPath();
+      rCtx.moveTo(-r.w/2, 0);
+      rCtx.lineTo(r.w/2, 0);
+      rCtx.lineTo(r.w*1.6, r.len);
+      rCtx.lineTo(-r.w*1.6, r.len);
+      rCtx.closePath();
+      rCtx.fill();
+      rCtx.restore();
+    });
+    requestAnimationFrame(drawRays);
+  }
+  drawRays();
+
+  /* ---------- PARALLAX (mouse + device tilt) ---------- */
+  const layerBack = document.querySelector('.layer-back');
+  let mouseX = 0, mouseY = 0;
+  function applyParallax(){
+    if(stageRemoved) return;
+    const tx = mouseX * 14;
+    const ty = mouseY * 10;
+    layerBack.style.transform = `translate(${-tx}px, ${-ty}px) scale(1.18)`;
+    layerFront.style.transform = `translate(${tx*0.4}px, ${ty*0.4}px) scale(1.04)`;
+    requestAnimationFrame(applyParallax);
+  }
+  window.addEventListener('mousemove', e => {
+    mouseX = (e.clientX / W - 0.5) * 2;
+    mouseY = (e.clientY / H - 0.5) * 2;
+  });
+  window.addEventListener('deviceorientation', e => {
+    if(e.gamma != null) mouseX = Math.max(-1, Math.min(1, e.gamma / 30));
+    if(e.beta != null) mouseY = Math.max(-1, Math.min(1, (e.beta - 45) / 40));
+  });
+  applyParallax();
+
+  /* ============================================================
+     CINEMATIC TIMELINE (GSAP)
+     ============================================================ */
+  function runTimeline(){
+    if(!window.gsap) return;
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        // hide stage
+        stage.classList.add('hidden');
+        body.classList.remove('locked');
+        cardWrap.classList.add('revealed');
+        setTimeout(() => {
+          if(!stageRemoved){ stage.remove(); stageRemoved = true; }
+        }, 800);
+      }
+    });
+
+    // 0.0 — stage fades from black
+    gsap.set(stage, {opacity:1});
+
+    // 0.3 — layer back subtle zoom
+    tl.fromTo(layerBack, {scale:1.3, opacity:0}, {scale:1.18, opacity:1, duration:1.2, ease:'power2.out'}, 0.3);
+
+    // 1.4 — crisp image fades in
+    tl.to(layerFront, {opacity:1, scale:1.04, duration:1.0, ease:'power2.out'}, 1.4);
+
+    // 2.0 — camera drift
+    tl.to(layerFront, {x:'2%', y:'1%', duration:0.6, ease:'sine.inOut'}, 2.0);
+
+    // 1.0 — HUD corners
+    tl.to(['#hudTL','#hudTR','#hudBL','#hudBR'], {opacity:1, duration:0.6, stagger:0.08}, 1.0);
+
+    // 1.8 — skip button
+    tl.call(() => skipBtn.classList.add('show'), null, 1.8);
+
+    // 2.0 — camera drift right
+    tl.to(layerFront, {x:'-2%', duration:0.6, ease:'sine.inOut'}, 2.0);
+
+    // 2.6 — breath burst from center (particle explosion)
+    tl.call(() => {
+      particles.forEach(p => {
+        const a = Math.random() * Math.PI * 2;
+        const d = 1.5 + Math.random() * 1.5;
+        p.sx = Math.cos(a) * d;
+        p.sy = Math.sin(a) * d;
+        p.x = p.sx; p.y = p.sy;
+      });
+    }, null, 2.6);
+
+    // 2.7 — shockwave
+    tl.call(() => {
+      gsap.fromTo(shockwave,
+        {opacity:0.9, scale:0, marginLeft:-10, marginTop:-10},
+        {opacity:0, scale:38, duration:1.4, ease:'power2.out'}
+      );
+    }, null, 2.7);
+
+    // 2.8 — camera zoom in dramatically
+    tl.to(layerFront, {scale:1.35, duration:1.0, ease:'power2.in'}, 2.8);
+    tl.to(layerBack, {scale:1.5, duration:1.0, ease:'power2.in'}, 2.8);
+
+    // 3.4 — particle assembly starts
+    tl.call(() => { assemblyActive = true; }, null, 3.4);
+
+    // 3.6 — opening logo spins in 3D
+    tl.to(openLogo, {
+      opacity:1,
+      scale:1,
+      rotateY:0,
+      duration:1.1,
+      ease:'back.out(1.6)'
+    }, 3.6);
+
+    // 4.2 — camera pulls back, logo takes over
+    tl.to(layerFront, {scale:1.05, opacity:0.35, duration:0.7, ease:'power2.out'}, 4.2);
+    tl.to(layerBack, {scale:1.2, opacity:0.5, duration:0.7, ease:'power2.out'}, 4.2);
+
+    // 4.5 — cinematic title flashes
+    tl.fromTo(cineTitle,
+      {opacity:0, scale:0.9, letterSpacing:'0.3em'},
+      {opacity:1, scale:1, letterSpacing:'0.04em', duration:0.7, ease:'power2.out'},
+      4.5
+    );
+    tl.to(cineTitle, {opacity:0, duration:0.5, ease:'power2.in'}, 5.1);
+
+    // 5.2 — background fades to low opacity
+    tl.to([layerFront, layerBack], {opacity:0.15, duration:0.6, ease:'power2.inOut'}, 5.2);
+
+    // 5.5 — logo shimmers
+    tl.to(openLogo, {
+      filter:'drop-shadow(0 0 60px rgba(95,180,255,1)) brightness(1.3)',
+      duration:0.3,
+      yoyo:true,
+      repeat:1,
+      ease:'power2.inOut'
+    }, 5.5);
+
+    // 6.2 — particles fade
+    tl.to({}, {
+      duration:0.6,
+      onUpdate: function(){
+        particleAlpha = 1 - this.progress();
+      }
+    }, 6.2);
+
+    // 6.4 — logo zooms + gold flash
+    tl.to(openLogo, {scale:1.6, opacity:0, duration:0.5, ease:'power2.in'}, 6.4);
+    tl.to(flash, {opacity:1, duration:0.15, ease:'power2.in'}, 6.5);
+    tl.to(flash, {opacity:0, duration:0.4, ease:'power2.out'}, 6.7);
+
+    // 6.9 — stage hides, card reveals
+    tl.call(() => {
+      stage.classList.add('hidden');
+      body.classList.remove('locked');
+      cardWrap.classList.add('revealed');
+    }, null, 6.9);
+  }
+
+  runTimeline();
+
+  /* ============================================================
+     SHARE / SAVE / COPY
+     ============================================================ */
+  const CARD_URL = window.location.href;
+
+  document.getElementById('btnShare').addEventListener('click', async () => {
+    const shareData = {
+      title: 'Car Comfort — The Factory Outlet',
+      text: 'Car Comfort · A Unique Car Interior Studio · Karnal',
+      url: CARD_URL
+    };
+    try{
+      if(navigator.share){
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(CARD_URL);
+        flashCopied('btnShare');
+      }
+    }catch(e){ /* user cancelled */ }
+  });
+
+  document.getElementById('btnCopy').addEventListener('click', async () => {
+    try{
+      await navigator.clipboard.writeText(CARD_URL);
+      flashCopied('btnCopy');
+    }catch(e){
+      // fallback
+      const ta = document.createElement('textarea');
+      ta.value = CARD_URL;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      flashCopied('btnCopy');
+    }
+  });
+
+  function flashCopied(id){
+    const btn = document.getElementById(id);
+    const orig = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Copied!';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = orig;
+    }, 1800);
+  }
+
+  /* ---- VCF DOWNLOAD ---- */
+  document.getElementById('btnVcf').addEventListener('click', () => {
+    const vcf = [
+      'BEGIN:VCARD',
+      'VERSION:3.0',
+      'N:Anand;Charan Jit;;;',
+      'FN:Charan Jit Anand',
+      'ORG:Car Comfort (The Factory Outlet)',
+      'TITLE:Owner — Car Interior Studio',
+      'TEL;TYPE=CELL,VOICE:+919896272747',
+      'URL:' + CARD_URL,
+      'NOTE:A Unique Car Interior Studio. Services: Door Panel/Dashboard, Roof Cloth, Seat Cover, Gear Cover, Khob Leather. Address: 30, Mugal Canal Rd, Sector 13 Extension, Sector 13, Karnal, Haryana 132001. Hours: Mon-Sat 9:30AM-8:00PM, Sun 10:30AM-4:00PM.',
+      'ADR;TYPE=WORK:;;30, Mugal Canal Rd, Sector 13 Extension;Karnal;Haryana;132001;India',
+      'END:VCARD'
+    ].join('\r\n');
+
+    const blob = new Blob([vcf], {type:'text/vcard;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Charan-Jit-Anand-Car-Comfort.vcf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
+
+})();
+</script>
+</body>
+</html>
