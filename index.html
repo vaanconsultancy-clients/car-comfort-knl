@@ -57,9 +57,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .container{max-width:var(--container);margin:0 auto;padding:0 24px}
 h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;letter-spacing:-.02em}
 
-/* ============================================================
-   PAGE LOADER
-   ============================================================ */
+/* PAGE LOADER */
 .page-loader{
   position:fixed;inset:0;z-index:10000;background:var(--black);
   display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px;
@@ -82,17 +80,13 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 @keyframes loaderFadeIn{to{opacity:1}}
 @keyframes loaderFill{to{width:100%}}
 
-/* ============================================================
-   PARTICLE CANVAS
-   ============================================================ */
+/* PARTICLE CANVAS */
 #particleCanvas{
   position:absolute;inset:0;z-index:0;width:100%;height:100%;
   opacity:.85;
 }
 
-/* ============================================================
-   SCROLL REVEAL
-   ============================================================ */
+/* SCROLL REVEAL */
 .reveal{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
 .reveal.in{opacity:1;transform:translateY(0)}
 .reveal-delay-1{transition-delay:.1s}
@@ -102,9 +96,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 .reveal-delay-5{transition-delay:.5s}
 .reveal-delay-6{transition-delay:.6s}
 
-/* ============================================================
-   HEADER
-   ============================================================ */
+/* HEADER */
 .header{
   position:fixed;top:0;left:0;right:0;z-index:1000;
   padding:20px 0;
@@ -150,9 +142,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 .nav-toggle.open span:nth-child(2){opacity:0}
 .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-/* ============================================================
-   HERO
-   ============================================================ */
+/* HERO */
 .hero{
   position:relative;min-height:100vh;display:flex;align-items:center;
   padding:140px 0 100px;overflow:hidden;
@@ -219,9 +209,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
   font-size:clamp(42px,7.5vw,88px);margin-bottom:28px;letter-spacing:-.035em;
   line-height:1.02;
 }
-.hero h1 .line{
-  display:block;overflow:hidden;
-}
+.hero h1 .line{display:block;overflow:hidden;}
 .hero h1 .line span{
   display:inline-block;transform:translateY(110%);
   animation:heroLineUp 1.1s cubic-bezier(.16,1,.3,1) forwards;
@@ -297,7 +285,6 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 }
 .hero-stat .label{font-size:13px;color:var(--gray);margin-top:4px;letter-spacing:.03em}
 
-/* Scroll indicator */
 .scroll-indicator{
   position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
   z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;
@@ -318,9 +305,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
   100%{transform:translateY(400%)}
 }
 
-/* ============================================================
-   SECTION LABELS & TITLES
-   ============================================================ */
+/* SECTION LABELS & TITLES */
 .section-label{
   display:inline-flex;align-items:center;gap:12px;
   font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
@@ -336,9 +321,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
   font-size:16px;color:var(--gray);max-width:620px;margin-bottom:60px;line-height:1.7;
 }
 
-/* ============================================================
-   SERVICES
-   ============================================================ */
+/* SERVICES */
 .services{
   padding:var(--section-pad);background:var(--navy);position:relative;overflow:hidden;
 }
@@ -392,9 +375,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
   border-radius:100px;font-size:13px;font-weight:600;color:var(--blue-bright);
 }
 
-/* ============================================================
-   GALLERY PREVIEW (hidden until photos load)
-   ============================================================ */
+/* GALLERY PREVIEW (hidden until photos load) */
 .gallery-preview{
   padding:var(--section-pad);background:var(--black);position:relative;
   display:none;
@@ -430,9 +411,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 .gallery-item:hover .caption{opacity:1;transform:translateY(0)}
 .gallery-cta{text-align:center}
 
-/* ============================================================
-   WHY US
-   ============================================================ */
+/* WHY US */
 .why-us{
   padding:var(--section-pad);background:var(--navy);position:relative;overflow:hidden;
 }
@@ -455,9 +434,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 .why-item h4{font-size:18px;margin-bottom:10px;color:var(--white)}
 .why-item p{font-size:14px;color:var(--gray);line-height:1.7}
 
-/* ============================================================
-   CTA STRIP
-   ============================================================ */
+/* CTA STRIP */
 .cta-strip{
   padding:80px 24px;background:linear-gradient(135deg,var(--navy-mid),var(--navy-light));
   border-top:1px solid var(--border);border-bottom:1px solid var(--border);
@@ -477,9 +454,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 .cta-inner p{color:var(--gray-light);font-size:16px;margin-bottom:32px;max-width:520px;margin-left:auto;margin-right:auto}
 .cta-buttons{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
 
-/* ============================================================
-   CONTACT
-   ============================================================ */
+/* CONTACT */
 .contact{padding:var(--section-pad);background:var(--black)}
 .contact-grid{
   display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;
@@ -509,9 +484,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 }
 .map-embed iframe{width:100%;height:100%;border:0;filter:invert(.9) hue-rotate(180deg) contrast(.9)}
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
+/* FOOTER */
 .footer{padding:72px 24px 36px;background:var(--navy);border-top:1px solid var(--border)}
 .footer-grid{
   display:grid;grid-template-columns:2fr 1fr 1fr;gap:56px;
@@ -533,9 +506,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 }
 .footer-bottom a{color:var(--blue-bright)}
 
-/* ============================================================
-   WHATSAPP FLOAT
-   ============================================================ */
+/* WHATSAPP FLOAT */
 .whatsapp-float{
   position:fixed;bottom:28px;right:28px;z-index:999;
   width:60px;height:60px;display:flex;align-items:center;justify-content:center;
@@ -554,9 +525,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 .whatsapp-float:hover{transform:scale(1.1);box-shadow:0 15px 40px rgba(37,211,102,.65)}
 .whatsapp-float svg{width:30px;height:30px;color:var(--white)}
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
+/* RESPONSIVE */
 @media (max-width:960px){
   .contact-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
@@ -591,7 +560,6 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
   .gallery-grid{grid-template-columns:1fr}
   .why-item .num{font-size:44px}
 }
-
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
   .reveal{opacity:1;transform:none}
@@ -653,7 +621,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
     <div class="hero-content">
       <div class="hero-badge">
         <span class="dot"></span>
-        Karnal's Premium Interior Studio
+        Karnal's Premium Car Interior Studio
       </div>
 
       <h1>
@@ -708,8 +676,6 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
     <p class="section-subtitle reveal reveal-delay-2">From seat covers to full custom interiors — everything your car needs to look and feel premium.</p>
 
     <div class="services-grid" id="servicesGrid">
-      <!-- Static services (replaced by Supabase if table has data) -->
-
       <div class="service-card reveal reveal-delay-1">
         <div class="service-icon">
           <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4-4 4 4 4-4 4 4M5 17h14"/></svg>
@@ -744,7 +710,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 
       <div class="service-card reveal reveal-delay-5">
         <div class="service-icon">
-          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3a9 9 0 100 18 9 9 0 000-18zM12 8v8M8 12h8"/></svg>
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8M8 12h8"/></svg>
         </div>
         <h3>Gear Cover & Knob Leather</h3>
         <p>Stylish gear knob and handbrake leather covers — small details, big impact on your car's interior.</p>
@@ -752,7 +718,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 
       <div class="service-card reveal reveal-delay-6">
         <div class="service-icon">
-          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.539 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 4l2 5 5 .5-4 3.5 1.5 5-4.5-3-4.5 3L8 13l-4-3.5 5-.5z"/></svg>
         </div>
         <h3>Custom Interior</h3>
         <p>Full custom interiors built from scratch — from design to fit, we craft the complete look you want.</p>
@@ -789,7 +755,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 
     <div class="why-grid">
       <div class="why-item reveal reveal-delay-1">
-        <div class="num">10+</div>
+        <div class="num">22+</div>
         <h4>Years Experience</h4>
         <p>Trusted by hundreds of car owners across Karnal and nearby districts.</p>
       </div>
@@ -929,12 +895,12 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 <script>
 /* ============================================================
    CAR COMFORT — INDEX.JS
+   Supabase keys integrated.
    ============================================================ */
 
 // ---------- CONFIG ----------
-// Fill these after Supabase setup. Until then, gallery stays hidden.
-const SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR-ANON-KEY-HERE';
+const SUPABASE_URL = 'https://hdvecixkfmbbnilurwns.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkdmVjaXhrZm1iYm5pbHVyd25zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE4ODU2ODksImV4cCI6MjEwNzQ2MTY4OX0.EKyYByXVVUviB_6oAH-fJP0vfUGaNJMForuKmB2r5IU';
 // ----------------------------
 
 // ---------- PAGE LOADER ----------
@@ -1129,8 +1095,6 @@ document.querySelectorAll('.service-card').forEach(card => {
 
 // ---------- SUPABASE SERVICES LOAD ----------
 async function loadServices() {
-  if (SUPABASE_URL.includes('YOUR-PROJECT')) return;
-
   try {
     const res = await fetch(
       `${SUPABASE_URL}/rest/v1/carcomfort_services?select=*&order=sort_order.asc,created_at.asc`,
@@ -1179,8 +1143,6 @@ async function loadServices() {
 
 // ---------- SUPABASE GALLERY PREVIEW ----------
 async function loadGalleryPreview() {
-  if (SUPABASE_URL.includes('YOUR-PROJECT')) return;
-
   try {
     const res = await fetch(
       `${SUPABASE_URL}/rest/v1/carcomfort_gallery?select=*&order=sort_order.asc,created_at.desc&limit=4`,
