@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Car Comfort — The Factory Outlet | Car Interior Studio, Karnal</title>
 <meta name="description" content="Car Comfort — The Factory Outlet. Premium car interior studio in Karnal. Door panel, dashboard, roof cloth, seat covers, gear covers & custom interiors. Sector 13, Karnal." />
-<meta name="keywords" content="car interior Karnal, seat cover Karnal, car comfort Karnal, dashboard cover, roof cloth, gear cover" />
+<meta name="keywords" content="car interior Karnal, seat cover Karnal, car comfort Karnal, dashboard cover, roof cloth, gear cover, steering wheel wrap" />
 <meta property="og:title" content="Car Comfort — The Factory Outlet" />
 <meta property="og:description" content="A Unique Car Interior Studio in Karnal." />
 <meta property="og:image" content="assets/carcomfortlogo.png" />
@@ -91,7 +91,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 }
 
 /* ============================================================
-   SCROLL REVEAL UTILITY
+   SCROLL REVEAL
    ============================================================ */
 .reveal{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
 .reveal.in{opacity:1;transform:translateY(0)}
@@ -139,11 +139,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
 .nav-cta{
   display:inline-flex;align-items:center;gap:8px;padding:11px 22px;
   background:var(--blue);color:var(--white);border-radius:100px;
-  font-size:14px;font-weight:600;transition:var(--transition);position:relative;overflow:hidden;
-}
-.nav-cta::before{
-  content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--blue-bright),var(--blue));
-  opacity:0;transition:opacity .35s ease;z-index:-1;
+  font-size:14px;font-weight:600;transition:var(--transition);
 }
 .nav-cta:hover{background:var(--blue-bright);box-shadow:var(--shadow-glow);transform:translateY(-2px)}
 .nav-cta svg{transition:transform .35s ease}
@@ -584,7 +580,6 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
   .hero-stat .num{font-size:24px}
   .hero-blocks .block{opacity:.3}
   .footer-grid{grid-template-columns:1fr;gap:40px}
-  .contact-form{padding:24px}
   .whatsapp-float{width:54px;height:54px;bottom:20px;right:20px}
 }
 @media (max-width:480px){
@@ -597,7 +592,6 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
   .why-item .num{font-size:44px}
 }
 
-/* Reduced motion */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
   .reveal{opacity:1;transform:none}
@@ -714,24 +708,9 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
     <p class="section-subtitle reveal reveal-delay-2">From seat covers to full custom interiors — everything your car needs to look and feel premium.</p>
 
     <div class="services-grid" id="servicesGrid">
-      <!-- Default services; replaced by Supabase if table has data -->
+      <!-- Static services (replaced by Supabase if table has data) -->
+
       <div class="service-card reveal reveal-delay-1">
-        <div class="service-icon">
-          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4-4 4 4 4-4 4 4M4 20h16M4 12V8a2 2 0 012-2h12a2 2 0 012 2v4"/></svg>
-        </div>
-        <h3>Door Panel & Dashboard</h3>
-        <p>Custom-wrapped door panels and dashboard styling that matches your car's personality — from subtle to statement.</p>
-      </div>
-
-      <div class="service-card reveal reveal-delay-2">
-        <div class="service-icon">
-          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M3 12l2-6h14l2 6M3 12v6h18v-6M7 18v2M17 18v2"/></svg>
-        </div>
-        <h3>Roof Cloth</h3>
-        <p>Premium roof lining replacement — fresh, clean, and perfectly fitted to restore your cabin's original feel.</p>
-      </div>
-
-      <div class="service-card reveal reveal-delay-3">
         <div class="service-icon">
           <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4-4 4 4 4-4 4 4M5 17h14"/></svg>
         </div>
@@ -739,13 +718,46 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.15;let
         <p>Diamond-stitched leather seat covers — custom fit for every car model, with premium stitching and finish.</p>
       </div>
 
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>
+        </div>
+        <h3>Steering Wheel Wrap</h3>
+        <p>Premium leather steering wheel wraps — better grip, better feel, and a sporty look that lasts.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4-4 4 4 4-4 4 4M4 20h16M4 12V8a2 2 0 012-2h12a2 2 0 012 2v4"/></svg>
+        </div>
+        <h3>Door Panel & Dashboard</h3>
+        <p>Custom-wrapped door panels and dashboard styling that matches your car's personality.</p>
+      </div>
+
       <div class="service-card reveal reveal-delay-4">
         <div class="service-icon">
-          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M3 12l2-6h14l2 6M3 12v6h18v-6M7 18v2M17 18v2"/></svg>
         </div>
-        <h3>Gear Cover</h3>
-        <p>Stylish gear knob and handbrake covers — small details that make a big impact on your car's interior.</p>
+        <h3>Roof Cloth</h3>
+        <p>Premium roof lining replacement — fresh, clean, and perfectly fitted to restore your cabin's feel.</p>
       </div>
+
+      <div class="service-card reveal reveal-delay-5">
+        <div class="service-icon">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3a9 9 0 100 18 9 9 0 000-18zM12 8v8M8 12h8"/></svg>
+        </div>
+        <h3>Gear Cover & Knob Leather</h3>
+        <p>Stylish gear knob and handbrake leather covers — small details, big impact on your car's interior.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-6">
+        <div class="service-icon">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.539 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+        </div>
+        <h3>Custom Interior</h3>
+        <p>Full custom interiors built from scratch — from design to fit, we craft the complete look you want.</p>
+      </div>
+
     </div>
   </div>
 </section>
@@ -938,11 +950,8 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 // ---------- HEADER SCROLL ----------
 const header = document.getElementById('header');
-let lastScroll = 0;
 window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  header.classList.toggle('scrolled', y > 30);
-  lastScroll = y;
+  header.classList.toggle('scrolled', window.scrollY > 30);
 }, { passive: true });
 
 // ---------- MOBILE MENU ----------
@@ -985,19 +994,14 @@ const revealObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
 
-function initReveals() {
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-}
-initReveals();
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 // ---------- SERVICE CARD MOUSE GLOW ----------
 document.querySelectorAll('.service-card').forEach(card => {
   card.addEventListener('mousemove', (e) => {
     const rect = card.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    card.style.setProperty('--mx', x + '%');
-    card.style.setProperty('--my', y + '%');
+    card.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width) * 100 + '%');
+    card.style.setProperty('--my', ((e.clientY - rect.top) / rect.height) * 100 + '%');
   });
 });
 
@@ -1035,14 +1039,12 @@ document.querySelectorAll('.service-card').forEach(card => {
   function draw() {
     ctx.clearRect(0, 0, w, h);
 
-    // Draw particles
     particles.forEach(p => {
       p.x += p.vx;
       p.y += p.vy;
       if (p.x < 0 || p.x > w) p.vx *= -1;
       if (p.y < 0 || p.y > h) p.vy *= -1;
 
-      // Mouse repel/attract subtle
       if (mouse.x !== null) {
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;
@@ -1060,7 +1062,6 @@ document.querySelectorAll('.service-card').forEach(card => {
       ctx.fill();
     });
 
-    // Draw connections
     const maxDist = isMobile ? 90 : 130;
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
@@ -1128,12 +1129,11 @@ document.querySelectorAll('.service-card').forEach(card => {
 
 // ---------- SUPABASE SERVICES LOAD ----------
 async function loadServices() {
-  // Skip if not configured
   if (SUPABASE_URL.includes('YOUR-PROJECT')) return;
 
   try {
     const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/services?select=*&order=sort_order.asc,created_at.asc`,
+      `${SUPABASE_URL}/rest/v1/carcomfort_services?select=*&order=sort_order.asc,created_at.asc`,
       {
         headers: {
           apikey: SUPABASE_ANON_KEY,
@@ -1147,14 +1147,16 @@ async function loadServices() {
 
     const grid = document.getElementById('servicesGrid');
     const icons = [
+      '<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4-4 4 4 4-4 4 4M5 17h14"/></svg>',
+      '<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>',
       '<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4-4 4 4 4-4 4 4M4 20h16M4 12V8a2 2 0 012-2h12a2 2 0 012 2v4"/></svg>',
       '<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M3 12l2-6h14l2 6M3 12v6h18v-6M7 18v2M17 18v2"/></svg>',
-      '<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4-4 4 4 4-4 4 4M5 17h14"/></svg>',
-      '<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>'
+      '<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8M8 12h8"/></svg>',
+      '<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 4l2 5 5 .5-4 3.5 1.5 5-4.5-3-4.5 3L8 13l-4-3.5 5-.5z"/></svg>'
     ];
 
     grid.innerHTML = data.map((s, i) => `
-      <div class="service-card reveal reveal-delay-${(i % 4) + 1}">
+      <div class="service-card reveal reveal-delay-${(i % 6) + 1}">
         <div class="service-icon">${icons[i % icons.length]}</div>
         <h3>${escapeHtml(s.name)}</h3>
         <p>Custom-crafted at our factory outlet in Karnal.</p>
@@ -1162,9 +1164,7 @@ async function loadServices() {
       </div>
     `).join('');
 
-    // Re-observe new cards
     grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-    // Re-attach mouse glow
     grid.querySelectorAll('.service-card').forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
@@ -1179,12 +1179,11 @@ async function loadServices() {
 
 // ---------- SUPABASE GALLERY PREVIEW ----------
 async function loadGalleryPreview() {
-  // Skip if not configured — gallery section stays hidden
   if (SUPABASE_URL.includes('YOUR-PROJECT')) return;
 
   try {
     const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/gallery?select=*&order=sort_order.asc,created_at.desc&limit=4`,
+      `${SUPABASE_URL}/rest/v1/carcomfort_gallery?select=*&order=sort_order.asc,created_at.desc&limit=4`,
       {
         headers: {
           apikey: SUPABASE_ANON_KEY,
@@ -1195,7 +1194,6 @@ async function loadGalleryPreview() {
     if (!res.ok) return;
     const data = await res.json();
 
-    // If no photos, keep section hidden
     if (!data.length) return;
 
     const section = document.getElementById('gallery');
@@ -1208,17 +1206,14 @@ async function loadGalleryPreview() {
       </div>
     `).join('');
 
-    // Show section
     section.classList.add('visible');
 
-    // Observe reveals + stagger
     requestAnimationFrame(() => {
       grid.querySelectorAll('.gallery-item').forEach((el, i) => {
         setTimeout(() => el.classList.add('in'), i * 120);
       });
     });
 
-    // Click → go to gallery page
     grid.querySelectorAll('.gallery-item').forEach(el => {
       el.addEventListener('click', () => {
         window.location.href = 'gallery.html';
